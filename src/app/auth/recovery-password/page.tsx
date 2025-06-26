@@ -1,3 +1,5 @@
-export default function RecoveryPasswordPage() {
-  return <div>Páginas de recuperación de contraseña</div>;
+import { RecoveryPasswordPage } from "@/modules/auth/pages/recovery-password.page";
+
+export default function RecoveryPassword() {
+  return <RecoveryPasswordPage />;
 }

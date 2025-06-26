@@ -1,5 +1,5 @@
-// This will validate auth
-export default function PrivateLayout({
+// This will validate if user is authenticated
+export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;

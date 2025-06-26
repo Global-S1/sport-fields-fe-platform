@@ -1,3 +1,5 @@
-export default function RegisterPage() {
-  return <div>Página de Registro</div>;
+import { RegisterPage } from "@/modules/auth/pages/register.page";
+
+export default function Register() {
+  return <RegisterPage />;
 }

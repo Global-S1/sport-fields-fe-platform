@@ -1,3 +1,3 @@
-export default function ProfilePage() {
-  return <div>Páginas de recuperación de perfil</div>;
+export default function Profile() {
+  return <div>Páginas de perfil</div>;
 }
