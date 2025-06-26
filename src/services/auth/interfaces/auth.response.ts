@@ -1,4 +1,4 @@
-import { EPrivilegesTitle } from "../../../shared/interfaces/privileges.interface";
+import { EPrivilegesTitle } from "@/shared/interfaces/privileges.interface";
 
 export interface IAuthLoginResponse {
   user: {
