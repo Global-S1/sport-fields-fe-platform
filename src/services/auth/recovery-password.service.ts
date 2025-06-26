@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { publicInstance } from "@/libs/axios";
 import { ISendCodeParams } from "./interfaces/send-code-params";
 import { ISendEmailParams } from "./interfaces/send-email-params";

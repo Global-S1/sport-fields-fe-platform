@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-backgroundMain: #f0f8ff;
+  --color-backgroundSoft: #ffffff;
+
+  --color-text-main: #000000;
+  --color-text-soft: #a6a6a6;
+  --color-text-inverse: #ffffff;
+  --color-text-complement: #737373;
+
+  --color-subtitle-main: #000000;
+  --color-subtitle-soft: #a6a6a6;
+  --color-subtitle-inverse: #ffffff;
+  --color-subtitle-complement: #737373;
+
+  --color-title-main: #000000;
+  --color-title-soft: #a6a6a6;
+  --color-title-inverse: #ffffff;
+  --color-title-complement: #737373;
+
+  --color-main-50: #ffffff;
+  --color-main-100: #efefef;
+  --color-main-200: #dcdcdc;
+  --color-main-300: #bdbdbd;
+  --color-main-400: #989898;
+  --color-main-500: #7c7c7c;
+  --color-main-600: #656565;
+  --color-main-700: #525252;
+  --color-main-800: #464646;
+  --color-main-900: #3d3d3d;
+  --color-main-950: #292929;
+
+  --color-primary-50: #f0f8ff;
+  --color-primary-100: #e4eefb;
+  --color-primary-200: #d8e9ff;
+  --color-primary-300: #d6e9fe;
+  --color-primary-400: #3481e2;
+  --color-primary-500: #2b59c3;
+  --color-primary-600: #112c5a;
+
+  --color-secondary-100: #e9f8e7;
+  --color-secondary-200: #c5f5bb;
+  --color-secondary-400: #80f14b;
+  --color-secondary-500: #70e738;
+  --color-secondary-600: #65c70f;
+  --color-secondary-700: #355a2f;
+
+  --color-greenLemon-300: #c8ffae;
+  --color-greenLemon-400: #dcf9d1;
+  --color-greenLemon-600: #70e738;
+  --color-greenLemon-700: #54b32e;
+
+  --color-blueSport-100: #f0f8ff;
+  --color-blueSport-300: #83cbec;
+  --color-blueSport-500: #3b8afe;
+  --color-blueSport-700: #2b59c3;
+
+  --color-star-yellow-300: #ffe39e;
+  --color-star-yellow-600: #fcdc24;
+
+  --color-redBlock-300: #dc7e74;
+  --color-redBlock-600: #ec4e4e;
+
+  --color-purple-neon-450: #7600ec;
+
+  --color-neutral-100: #e0e0e0;
+  --color-neutral-300: #bdbdbd;
+  --color-neutral-600: #616161;
+  --color-neutral-full: #000000;
+  --color-neutral-inverse: #ffffff;
+
+  --color-warn-400: #ffe863;
+  --color-warn-500: #eabd1c;
+
+  --color-danger-600: #9e000d;
+}
