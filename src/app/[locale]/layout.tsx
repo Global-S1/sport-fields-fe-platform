@@ -1,6 +1,7 @@
 import { routing } from "@/i18n/routing";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
+import "../globals.css";
 
 export default async function RootLayout({
   children,

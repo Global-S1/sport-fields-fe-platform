@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { publicInstance } from "@/libs/axios";
 import { EErrorKindMessage } from "@/shared/enums/global.enum";
-import { IAuthLoginParams } from "./interfaces/auth.params";
-import { IAuthLoginResponse } from "./interfaces/auth.response";
-import { IRegisterCustomerResponse } from "./interfaces/register.response";
 import {
   IHttpDataItem,
   IHttpResponse,
 } from "@/shared/interfaces/http-request-response.interface";
+import { IAuthLoginParams } from "./interfaces/auth.params";
+import { IAuthLoginResponse } from "./interfaces/auth.response";
+import { IRegisterCustomerResponse } from "./interfaces/register.response";
 
 export const LoginService = () => {
   // ISSUE: En revisión por i18n de Next
