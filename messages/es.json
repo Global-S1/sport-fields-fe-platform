@@ -1,0 +1,644 @@
+{
+  "auth": {
+    "login": {
+      "title": "¿Listo para jugar?",
+      "description": "Inicia sesión con tu usuario o crea una nueva cuenta",
+      "usernameInput": {
+        "label": "Nombre de usuario",
+        "placeholder": "Ingresa tu nombre de usuario",
+        "validations": {
+          "required": "Este campo es requerido"
+        }
+      },
+      "passwordInput": {
+        "label": "Contraseña",
+        "placeholder": "Ingresa tu contraseña",
+        "validations": {
+          "required": "Este campo es requerido"
+        }
+      },
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "loginBtn": "Ingresar",
+      "register": {
+        "info": "¿Aún no tienes una cuenta?",
+        "btnText": "Registrate ahora"
+      },
+      "termAndServices": "Términos y Condiciones"
+    },
+    "register": {
+      "back": "Regresar",
+      "tabs": {
+        "customer": "Como usuario",
+        "admin": "Como administrador"
+      },
+      "customer": {
+        "title": "Crea una cuenta ahora",
+        "subtitle": "Regístrate para reservar canchas y disfrutar de eventos deportivos",
+        "form": {
+          "nameInput": {
+            "label": "Nombre completo",
+            "placeholder": "Ingresa tu nombre completo",
+            "validations": {
+              "required": "Este campo es requerido",
+              "minLength": "El nombre debe tener al menos 2 caracteres"
+            }
+          },
+          "lastNameInput": {
+            "label": "Apellido",
+            "placeholder": "Ingresa tu apellido",
+            "validations": {
+              "required": "Este campo es requerido"
+            }
+          },
+          "emailInput": {
+            "label": "Correo electrónico",
+            "placeholder": "Ingresa tu correo electrónico",
+            "validations": {
+              "required": "Este campo es requerido",
+              "pattern": "Ingresa un correo electrónico válido"
+            }
+          },
+          "docIdentityInput": {
+            "label": "Documento de identidad (DNI)",
+            "placeholder": "71717171",
+            "validations": {
+              "required": "Este campo es requerido",
+              "pattern": "Ingresa un número de identificación válido"
+            }
+          },
+          "cellphoneInput": {
+            "label": "Número de celular",
+            "placeholder": "987654321",
+            "validations": {
+              "required": "Este campo es requerido",
+              "pattern": "Ingresa un número de celular válido",
+              "minLength": "El número debe tener al menos 9 dígitos",
+              "maxLength": "El número no puede tener más de 15 dígitos"
+            }
+          },
+          "rucInput": {
+            "label": "RUC (opcional)",
+            "placeholder": "12345678901",
+            "validations": {
+              "pattern": "Ingresa un RUC válido"
+            }
+          },
+          "passwordInput": {
+            "label": "Contraseña",
+            "placeholder": "Ingresa tu contraseña",
+            "validations": {
+              "required": "Este campo es requerido",
+              "minLength": "La contraseña debe tener al menos 8 caracteres",
+              "hasUppercase": "Debe incluir letras mayúsculas (A-Z)",
+              "hasLowercase": "Debe incluir letras minúsculas (a-z)",
+              "hasNumber": "Debe incluir al menos un número",
+              "hasSymbol": "Debe incluir al menos un símbolo (!@#$&/*)"
+            }
+          },
+          "confirmPasswordInput": {
+            "label": "Confirmar contraseña",
+            "placeholder": "Confirma tu contraseña",
+            "validations": {
+              "required": "Este campo es requerido",
+              "validate": "Las contraseñas no coinciden"
+            }
+          },
+          "termsAndConditionsCheckbox": {
+            "label": "Acepto los",
+            "link": "términos y condiciones"
+          },
+          "button": "Crear cuenta"
+        },
+        "toasts": {
+          "success": "Cuenta creada exitosamente"
+        }
+      },
+      "admin": {
+        "title": "Registro cuenta de administradores",
+        "formAdminDataForm": {
+          "nameInput": {
+            "label": "Nombre completo",
+            "placeholder": "Ingresa tu nombre completo",
+            "validations": {
+              "required": "Este campo es requerido",
+              "minLength": "El nombre debe tener al menos 2 caracteres"
+            }
+          },
+          "lastNameInput": {
+            "label": "Apellido",
+            "placeholder": "Ingresa tu apellido",
+            "validations": {
+              "required": "Este campo es requerido"
+            }
+          },
+          "emailInput": {
+            "label": "Correo electrónico",
+            "placeholder": "Ingresa tu correo electrónico",
+            "validations": {
+              "required": "Este campo es requerido",
+              "pattern": "Ingresa un correo electrónico válido"
+            }
+          },
+          "docIdentityInput": {
+            "label": "Documento de identidad (DNI)",
+            "placeholder": "71717171",
+            "validations": {
+              "required": "Este campo es requerido",
+              "pattern": "Ingresa un número de identificación válido"
+            }
+          },
+          "cellphoneInput": {
+            "label": "Número de celular",
+            "placeholder": "+51 987654321",
+            "validations": {
+              "required": "Este campo es requerido",
+              "pattern": "Solo se permiten números",
+              "minLength": "El número debe tener al menos 9 dígitos",
+              "maxLength": "El número no puede tener más de 15 dígitos"
+            }
+          },
+          "rucInput": {
+            "label": "RUC (opcional)",
+            "placeholder": "123456789012",
+            "validations": {
+              "pattern": "Ingresa un RUC válido"
+            }
+          },
+          "button": "Siguiente"
+        },
+        "formAdminPasswordForm": {
+          "passwordInput": {
+            "label": "Contraseña",
+            "placeholder": "Ingresa tu contraseña",
+            "validations": {
+              "required": "Este campo es requerido",
+              "minLength": "La contraseña debe tener al menos 8 caracteres",
+              "hasUppercase": "Debe incluir letras mayúsculas (A-Z)",
+              "hasLowercase": "Debe incluir letras minúsculas (a-z)",
+              "hasNumber": "Debe incluir al menos un número",
+              "hasSymbol": "Debe incluir al menos un símbolo (!@#$&/*)"
+            }
+          },
+          "validations": {
+            "minLength": "Usa al menos 8 caracteres",
+            "hasUppercase": "Incluye al menos una letra mayúscula (A-Z)",
+            "hasLowercase": "Incluye al menos una letra minúscula (a-z)",
+            "hasNumber": "Incluye al menos un número",
+            "hasSymbol": "Incluye al menos un símbolo (!@#$&/*)"
+          },
+          "confirmPasswordInput": {
+            "label": "Confirmar contraseña",
+            "placeholder": "Confirma tu contraseña",
+            "validations": {
+              "required": "Debes confirmar tu contraseña",
+              "validate": "Las contraseñas no coinciden"
+            }
+          },
+          "buttons": {
+            "back": "Regresar",
+            "submit": "Crear cuenta"
+          }
+        }
+      }
+    },
+    "recoveryPassword": {
+      "sendEmail": {
+        "title": "Olvidaste tu contraseña",
+        "description": "Por favor, ingresa tu email registrado para enviarte el código",
+        "sendButton": "Enviar",
+        "success": "Correo enviado",
+        "emailInput": {
+          "label": "Email",
+          "placeholder": "tucorreo@gmail.com",
+          "required": "El email es requerido",
+          "pattern": "Ingresa un correo válido"
+        }
+      },
+      "sendCode": {
+        "title": "Olvidaste tu contraseña",
+        "description": "Por favor, ingresa el código enviado a tu correo",
+        "sendButton": "Verificar",
+        "success": "Otp-Code correcto",
+        "codeInput": {
+          "required": "Se debe ingresar un código"
+        }
+      },
+      "changuePassword": {
+        "title": "Restablecer Contraseña",
+        "description": "Por favor, ingrese una contraseña con 8 caracteres (letras y números)",
+        "sendButton": "Restablecer",
+        "success": "La contraseña se cambio exitosamente",
+        "newPassword": {
+          "label": "Contraseña nueva",
+          "required": "Debe ingresar una contraseña",
+          "min": "La contraseña debe tener al menos 8 caracteres"
+        },
+        "repeatPassword": {
+          "label": "Repetir contraseña nueva",
+          "required": "Debe ingresar su contraseña nuevamente",
+          "equal": "Las contraseña deben ser iguales",
+          "min": "La contraseña debe tener al menos 8 caracteres"
+        }
+      }
+    }
+  },
+  "private": {
+    "pages": {
+      "sportFields": {
+        "table": {
+          "headers": [
+            {
+              "label": "Cancha",
+              "key": "name",
+              "sortable": false
+            },
+            {
+              "label": "Categoría",
+              "key": "categoryName",
+              "sortable": false
+            },
+            {
+              "label": "Calificación",
+              "key": "rate",
+              "sortable": false
+            },
+            {
+              "label": "ID",
+              "key": "sportFieldId",
+              "sortable": false
+            },
+            {
+              "label": "Estado",
+              "key": "isAvailable",
+              "sortable": false
+            },
+            {
+              "label": "",
+              "key": "actions",
+              "sortable": false
+            }
+          ]
+        },
+        "content": {
+          "title": "Mis Canchas",
+          "buttons": {
+            "add": {
+              "label": "Agregar nueva cancha",
+              "type": "button"
+            }
+          },
+          "actions": {
+            "view": "Ver Cancha",
+            "edit": "Editar",
+            "delete": "Eliminar"
+          },
+          "state": {
+            "active": "Activo",
+            "draft": "En borrador"
+          },
+          "create": {
+            "title": "CREAR NUEVA CANCHA",
+            "form": {
+              "fields": {
+                "name": {
+                  "name": "name",
+                  "label": "Nombre de la cancha",
+                  "placeholder": "Cancha de Fútbol 4x4",
+                  "type": "text"
+                },
+                "category": {
+                  "label": "Selecciona una categoría"
+                },
+                "visitantsNumberLimit": {
+                  "name": "visitantsNumberLimit",
+                  "id": "visitantsNumberLimit",
+                  "label": "Asigna un límite de visitantes",
+                  "placeholder": "",
+                  "type": "number",
+                  "validations": [
+                    {
+                      "type": "required",
+                      "value": "^\\d+(\\.\\d+)?$",
+                      "message": "Valor no permitido",
+                      "pattern": true
+                    }
+                  ]
+                },
+                "anfitrion": {
+                  "name": "anfitrion",
+                  "label": "Asignar a un anfitrión por defecto",
+                  "placeholder": "",
+                  "type": "select"
+                },
+                "description": {
+                  "name": "description",
+                  "label": "Descripción de la cancha",
+                  "placeholder": "Cancha de fútbol 4x4 con pasto sintético",
+                  "type": "textarea"
+                },
+                "images": {
+                  "coverImage": {
+                    "label": "Agregar imagen de portada para el campo"
+                  },
+                  "otherImages": {
+                    "label": "Agregar más imágenes para el campo"
+                  }
+                },
+                "minTimeForReservation": {
+                  "name": "minTimeForReservation",
+                  "label": "Tiempo mínimo para reservar",
+                  "placeholder": "",
+                  "type": "select"
+                },
+                "maxTimeForReservation": {
+                  "name": "maxTimeForReservation",
+                  "label": "Tiempo máximo para reservar",
+                  "placeholder": "",
+                  "type": "select"
+                },
+                "price": {
+                  "name": "pricePerHour",
+                  "label": "Precio por hora",
+                  "placeholder": "",
+                  "type": "number",
+                  "validations": [
+                    {
+                      "type": "required",
+                      "value": "^\\d+(\\.\\d+)?$",
+                      "message": "Valor no permitido",
+                      "pattern": true
+                    }
+                  ]
+                },
+                "payouts": {
+                  "name": "payouts",
+                  "label": "Forma de pagos disponibles",
+                  "placeholder": "",
+                  "type": "select"
+                }
+              }
+            },
+            "buttons": {
+              "cancel": {
+                "label": "Cancel",
+                "type": "button"
+              },
+              "draft": {
+                "label": "Guardar como borrador",
+                "type": "button"
+              },
+              "save": {
+                "label": "Crear publicación",
+                "type": "button"
+              }
+            }
+          },
+          "edit": {
+            "title": "EDITAR CANCHA",
+            "buttons": {
+              "save": {
+                "label": "Guardar cambios",
+                "type": "button"
+              },
+              "draft": {
+                "label": "Guardar como borrador",
+                "type": "button"
+              }
+            }
+          },
+          "detail": {
+            "title": "VISTA DE LA CANCHA",
+            "tabPanel": {
+              "tabs": {
+                "description": {
+                  "label": "Descripción"
+                },
+                "details": { "label": "Detalles" },
+                "opinions": { "label": "Opiniones" }
+              }
+            },
+            "text": {
+              "opinion": {
+                "plural": "Opiniones",
+                "singular": "Opinión"
+              },
+              "owner": "Anfitrión",
+              "time": "por hora",
+              "distance": "de distancia"
+            },
+            "details": {
+              "include": "Incluye"
+            },
+            "buttons": {
+              "edit": {
+                "label": "EDITAR CANCHA",
+                "type": "button"
+              },
+              "delete": {
+                "label": "ELIMINAR",
+                "type": "button"
+              }
+            }
+          },
+          "modal": {
+            "delete": {
+              "text": "¿Seguro que deseas eliminar la cancha?",
+              "buttons": {
+                "cancel": "No",
+                "confirm": "Si"
+              }
+            },
+            "edit": {
+              "text": "¿Seguro que deseas guardar los cambios?",
+              "buttons": {
+                "cancel": "No",
+                "confirm": "Si"
+              }
+            }
+          }
+        }
+      },
+      "reservations": {
+        "reservations": {
+          "title": "Reservas",
+          "filters": {
+            "all": "Todos",
+            "inProgress": "En progreso",
+            "completed": "Completados",
+            "canceled": "Cancelados",
+            "pending": "Pendiente de pago"
+          },
+          "createButton": "Crear nueva reserva",
+          "card": {
+            "order": "No. Orden",
+            "edit": "Editar",
+            "customer": "Pedido por:",
+            "clients": "personas",
+            "buttons": {
+              "detail": "Ver detalles",
+              "confirm": "Confirmar pago",
+              "finish": "Finaliza",
+              "completed": "Pagado"
+            },
+            "labelStatus": {
+              "inProgress": "En progreso",
+              "canceled": "Cancelado",
+              "completed": "Completado",
+              "pending": "Pendiente de pago"
+            }
+          }
+        },
+        "createReservation": {
+          "title": "Crear reserva",
+          "managerComponent": {
+            "order": "No. Orden",
+            "form": {
+              "name": {
+                "label": "Agregue un nombre a la reserva",
+                "placeholder": "Ingrese el nombre de la reserva"
+              },
+              "date": "Escoge el día",
+              "schedule": "Escoge el horario",
+              "sportFields": {
+                "title": "Selecciona una de tus canchas",
+                "edit": "Editar"
+              },
+              "host": "Asignar anfitrión",
+              "customers": "Agregar los correos/usuarios de los visitantes",
+              "paymentMethod": "Forma de pago (opcional)",
+              "paymentPlaceholder": "Por defecto establecido al momento de crea la cancha",
+              "buttons": {
+                "cancel": "Cancelar",
+                "submit": "Crear reserva"
+              }
+            }
+          }
+        },
+        "editReservation": {
+          "title": "Editar reserva",
+          "managerComponent": {
+            "order": "No. Orden",
+            "form": {
+              "name": {
+                "label": "Agregue un nombre a la reserva",
+                "placeholder": "Ingrese el nombre de la reserva"
+              },
+              "date": "Escoge el día",
+              "schedule": "Escoge el horario",
+              "sportFields": {
+                "title": "Selecciona una de tus canchas",
+                "edit": "Editar"
+              },
+              "host": "Asignar anfitrión",
+              "customers": "Agregar los correos/usuarios de los visitantes",
+              "paymentMethod": "Forma de pago (opcional)",
+              "paymentPlaceholder": "Por defecto establecido al momento de crea la cancha",
+              "buttons": {
+                "cancel": "Cancelar",
+                "submit": "Guardar cambios"
+              }
+            }
+          }
+        },
+        "reservationDetails": {
+          "order": "No. Orden",
+          "dateReservation": {
+            "date": "Reserva",
+            "schedule": ", de"
+          },
+          "category": "Categoría: ",
+          "host": "Anfitrión",
+          "opinions": "opiniones",
+          "directions": {
+            "distance": {
+              "to": "A",
+              "distance": "de"
+            },
+            "label": "Dirección"
+          },
+          "tabs": {
+            "description": "Descripción",
+            "details": "Detalles",
+            "opinions": "Opiniones"
+          },
+          "price": {
+            "label": "Ganancia",
+            "description": "Pendiente a depositar",
+            "method": "Tarjeta de crédito"
+          },
+          "customers": {
+            "label": "Clientes",
+            "button": "Ver perfil",
+            "reservations": "reservas"
+          },
+          "labelStatus": {
+            "canceled": "Cancelado",
+            "completed": "Completado",
+            "inProgress": "En progreso",
+            "pending": "Pendiente de pago"
+          },
+          "buttons": {
+            "edit": "EDITAR RESERVA",
+            "delete": "ELIMINAR",
+            "qualify": "CALIFICAR RESERVACIÓN"
+          },
+          "modal": {
+            "subtitle": "Opiones hacia el cliente",
+            "otherOpinions": "Últimas opiniones que ha hecho el usuario"
+          }
+        }
+      }
+    },
+    "components": {
+      "table": {
+        "emptyResults": {
+          "title": "No se encontraron resultados",
+          "description": "Ajusta tus filtros e intenta de nuevo"
+        }
+      },
+      "pagination": {
+        "size": "Vista general",
+        "rows": "filas",
+        "sizes": [10, 20, 30, 40, 50]
+      }
+    }
+  },
+  "public": {
+    "pages": {
+      "sportFields": {
+        "request": {
+          "errorLocation": "No podemos acceder a tu ubicación, necesitas activarla",
+          "loading": "Cargando...",
+          "noData": "Al parecer no tenemos datos",
+          "loadMore": "Cargando más..."
+        },
+        "searcher": {
+          "placeholder": "Buscar una cancha"
+        },
+        "filterModal": {
+          "title": "Filtros",
+          "buttons": {
+            "delete": "Borrar",
+            "apply": "Aplicar filtros"
+          }
+        },
+        "card": {
+          "distance": "kilómetros de distancia",
+          "price": "la hora"
+        }
+      },
+      "sportFieldsDetail": {
+        "text": {
+          "distance": "kilómetros de distancia",
+          "location": "Dirección",
+          "owner": "Anfitrión",
+          "includes": "Incluye",
+          "hour": "la hora"
+        },
+        "buttons": {
+          "reservation": "Reservar"
+        }
+      }
+    }
+  }
+}
