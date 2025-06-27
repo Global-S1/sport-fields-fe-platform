@@ -1,6 +1,7 @@
 import { routing } from "@/i18n/routing";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
+import { Toaster } from "react-hot-toast";
 import "../globals.css";
 
 export default async function RootLayout({
@@ -18,6 +19,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body>
+        <Toaster />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>
