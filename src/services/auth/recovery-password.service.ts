@@ -2,14 +2,14 @@ import { publicInstance } from "@/libs/axios";
 import { ISendCodeParams } from "./interfaces/send-code-params";
 import { ISendEmailParams } from "./interfaces/send-email-params";
 import { ISendPasswordParams } from "./interfaces/send-passwod-params";
+import { IRecoveryPasswordContent } from "@/modules/auth/interfaces/recovery-password-content.interface";
+import { getContentLocal } from "@/shared/helpers/get-content-local";
 
 export const RecoveryPasswordService = () => {
-  // ISSUE: En revisión por i18n de Next
-  //   const getContent = async (lang: string) => {
-  //     const content = await getContentLocal(lang);
-  //     // TODO: Poner la interfaz de contenido
-  //     return content.auth.recoveryPassword as any;
-  //   };
+  const getContent = async (lang: string) => {
+    const content = await getContentLocal(lang);
+    return content.auth.recoveryPassword as IRecoveryPasswordContent;
+  };
 
   const sendEmail = async (data: ISendEmailParams) => {
     try {
@@ -53,5 +53,6 @@ export const RecoveryPasswordService = () => {
     sendEmail,
     sendCode,
     sendPassword,
+    getContent,
   };
 };
