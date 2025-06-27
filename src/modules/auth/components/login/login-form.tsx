@@ -7,7 +7,7 @@ import { Input } from "@/shared/components/input/input.component";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { MdOutlineLock, MdOutlineMail } from "react-icons/md";
-import useLogin from "../hooks/useLogin";
+import useLogin from "../../hooks/useLogin";
 
 export const LoginForm = () => {
   const { form, isPending, loginSumit } = useLogin();
@@ -81,7 +81,7 @@ export const LoginForm = () => {
       <p className="mt-2 text-center text-sm text-gray-500">
         {t("register.info")}
         <Link
-          href="register"
+          href="auth/register"
           className="text-blueSport-500 underline hover:text-blueSport-700 duration-200 ml-2"
         >
           {t("register.btnText")}
