@@ -1,44 +1,20 @@
 "use client";
-import { usePending } from "@/shared/hooks/usePending";
-import { useCustomRouter } from "@/shared/hooks/useRouter";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import clsx from "../../../../libs/clsx";
 import { Box } from "../../../../shared/components/box/box.component";
 import { ERegisterAdminSteps } from "../../enums/register.enum";
-import { IRegisterAdminFields } from "../../interfaces/register-form.interface";
+import useRegisterAdmin from "../../hooks/useRegisterAdmin";
 import { FormAdminDataForm } from "./form-admin/data-form";
 import { FormAdminPasswordForm } from "./form-admin/password-form";
 
 export const RegisterFormAdmin = () => {
-  const { isPending } = usePending();
-  const [error] = useState("");
+  const { isPending, error, form, registerAdminSubmit } = useRegisterAdmin();
+
   const t = useTranslations("auth.register.admin");
   const [steps, setSteps] = useState<ERegisterAdminSteps>(
     ERegisterAdminSteps.DATA
   );
-
-  const router = useCustomRouter();
-  const form = useForm<IRegisterAdminFields>({
-    mode: "onChange",
-    shouldUnregister: false,
-    defaultValues: {
-      userEstablishment: [{ paymentProcessors: [], extraServices: [] }],
-    },
-  });
-
-  // const error =
-  //   (errorPrimitive &&
-  //     typeof errorPrimitive === "object" &&
-  //     "response" in errorPrimitive &&
-  //     (errorPrimitive as any).response?.data?.kindMessage) ||
-  //   undefined;
-
-  const onSubmit = async () => {
-    // Llamar a los server actions
-    router.push("auth");
-  };
 
   return (
     <Box className="pb-4">
@@ -88,7 +64,7 @@ export const RegisterFormAdmin = () => {
       {steps === ERegisterAdminSteps.PASSWORD && (
         <FormAdminPasswordForm
           form={form}
-          onSubmit={onSubmit}
+          onSubmit={registerAdminSubmit}
           isLoading={isPending}
           setSteps={setSteps}
         />
