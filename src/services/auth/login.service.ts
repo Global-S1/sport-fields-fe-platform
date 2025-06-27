@@ -1,81 +1,23 @@
+"use server";
+
 import { publicInstance } from "@/libs/axios";
-import { EErrorKindMessage } from "@/shared/enums/global.enum";
-import {
-  IHttpDataItem,
-  IHttpResponse,
-} from "@/shared/interfaces/http-request-response.interface";
+import { IHttpDataItem } from "@/shared/interfaces/http-request-response.interface";
+import { cookiesClient } from "@/shared/utils/cookies-client";
 import { IAuthLoginParams } from "./interfaces/auth.params";
 import { IAuthLoginResponse } from "./interfaces/auth.response";
-import { IRegisterCustomerResponse } from "./interfaces/register.response";
 
-export const LoginService = () => {
-  // ISSUE: En revisión por i18n de Next
-  //   const getLoginContent = async (lang: string) => {
-  //     const content = await getContentLocal(lang);
-  //     return content.auth.login as ILoginContent;
-  //   };
+export const login = async (data: IAuthLoginParams) => {
+  try {
+    const response = await publicInstance.post<
+      IHttpDataItem<IAuthLoginResponse>
+    >("/security/login", data);
 
-  const login = async (data: IAuthLoginParams) => {
-    try {
-      const response = await publicInstance.post<
-        IHttpDataItem<IAuthLoginResponse>
-      >("/security/login", data, { withCredentials: true });
+    const setCookieHeader = response.headers["set-cookie"];
 
-      return response.data;
-    } catch (error: any) {
-      throw new Error(error?.response?.data?.kindMessage);
-    }
-  };
+    await cookiesClient("sessionToken", setCookieHeader?.[0]);
 
-  const logout = async (token: string) => {
-    try {
-      const response = await publicInstance.post<
-        IHttpResponse<IRegisterCustomerResponse>
-      >(
-        "/security/logout",
-        {},
-        { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
-      );
-      return response.data;
-    } catch (error) {
-      const err = error as any;
-
-      if (
-        err.response.data.kindMessage ===
-        EErrorKindMessage.SESSION_IS_NOT_ACTIVE
-      ) {
-        return EErrorKindMessage.SESSION_IS_NOT_ACTIVE;
-      }
-      throw new Error(err.kindMessage);
-    }
-  };
-
-  const logoutAll = async (token: string) => {
-    try {
-      const response = await publicInstance.post<
-        IHttpResponse<IRegisterCustomerResponse>
-      >(
-        "/security/logout-all-sessions",
-        {},
-        { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
-      );
-      return response.data;
-    } catch (error) {
-      const err = error as any;
-
-      if (
-        err.response.data.kindMessage ===
-        EErrorKindMessage.SESSION_IS_NOT_ACTIVE
-      ) {
-        return EErrorKindMessage.SESSION_IS_NOT_ACTIVE;
-      }
-      throw new Error(err.kindMessage);
-    }
-  };
-
-  return {
-    login,
-    logout,
-    logoutAll,
-  };
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error?.response?.data?.kindMessage);
+  }
 };
