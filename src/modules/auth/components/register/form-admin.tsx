@@ -1,0 +1,98 @@
+"use client";
+import { usePending } from "@/shared/hooks/usePending";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import clsx from "../../../../libs/clsx";
+import { Box } from "../../../../shared/components/box/box.component";
+import { ERegisterAdminSteps } from "../../enums/register.enum";
+import { IRegisterAdminFields } from "../../interfaces/register-form.interface";
+import { FormAdminDataForm } from "./form-admin/data-form";
+import { FormAdminPasswordForm } from "./form-admin/password-form";
+
+export const RegisterFormAdmin = () => {
+  const { isPending } = usePending();
+  const [steps, setSteps] = useState<ERegisterAdminSteps>(
+    ERegisterAdminSteps.DATA
+  );
+
+  // const navigate = useNavigate();
+  const form = useForm<IRegisterAdminFields>({
+    mode: "onChange",
+    shouldUnregister: false,
+    defaultValues: {
+      userEstablishment: [{ paymentProcessors: [], extraServices: [] }],
+    },
+  });
+
+  // const error =
+  //   (errorPrimitive &&
+  //     typeof errorPrimitive === "object" &&
+  //     "response" in errorPrimitive &&
+  //     (errorPrimitive as any).response?.data?.kindMessage) ||
+  //   undefined;
+
+  const onSubmit = async () => {
+    // Llamar a los server actions
+  };
+
+  return (
+    <Box className="pb-4">
+      <Box>
+        <h1 className="text-clip bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent text-2xl font-semibold text-center mb-4">
+          {/* {content?.title} */}
+        </h1>
+      </Box>
+
+      <Box className="w-full max-w-xl h-16 mx-auto flex items-center justify-evenly">
+        {Object.values(ERegisterAdminSteps).map((step, index) => (
+          <button
+            className="flex flex-col items-center w-fit cursor-default"
+            key={step}
+          >
+            <Box
+              className={clsx(
+                "rounded-full size-8 flex items-center justify-center",
+                steps === step
+                  ? "bg-blueSport-500 text-white"
+                  : "border border-blueSport-500 text-blueSport-500"
+              )}
+            >
+              <span className="font-semibold">{index + 1}</span>
+            </Box>
+            <Box
+              className={clsx(
+                "h-1 w-10 mt-1",
+                steps === step
+                  ? "bg-blueSport-500"
+                  : "border border-blueSport-500"
+              )}
+            ></Box>
+          </button>
+        ))}
+      </Box>
+
+      {/* {error && (
+        <Box className="w-full max-w-xl mx-auto bg-red-500 text-white text-center text-sm font-medium rounded-xl my-4 p-2">
+          {error}
+        </Box>
+      )} */}
+
+      {steps === ERegisterAdminSteps.DATA && (
+        <FormAdminDataForm
+          // content={content?.formAdminDataForm}
+          form={form}
+          setSteps={setSteps}
+        />
+      )}
+      {steps === ERegisterAdminSteps.PASSWORD && (
+        <FormAdminPasswordForm
+          // content={content?.formAdminPasswordForm}
+          form={form}
+          onSubmit={onSubmit}
+          isLoading={isPending}
+          setSteps={setSteps}
+        />
+      )}
+    </Box>
+  );
+};

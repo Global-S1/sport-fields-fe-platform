@@ -3,7 +3,7 @@ import { Box } from "@/shared/components/box/box.component";
 import { Heading } from "@/shared/components/text/heading.component";
 import { Text } from "@/shared/components/text/text.component";
 import { getTranslations } from "next-intl/server";
-import { LoginForm } from "../components/login-form";
+import { LoginForm } from "../components/login/login-form";
 
 export const LoginPage = async () => {
   const t = await getTranslations("auth.login");
