@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IRegisterAdminFields } from "@/modules/auth/interfaces/register-form.interface";
+import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { MdCheckCircleOutline, MdOutlineCancel } from "react-icons/md";
@@ -21,6 +22,7 @@ export const FormAdminPasswordForm = ({
   setSteps,
   isLoading,
 }: Props) => {
+  const t = useTranslations("auth.register.admin.formAdminPasswordForm");
   const password = form.watch("password");
   const values = form.getValues();
 
@@ -34,64 +36,78 @@ export const FormAdminPasswordForm = ({
       onSubmit={form.handleSubmit(onSubmit)}
     >
       <InputPassword
-        // label={content?.passwordInput.label}
-        // placeholder={content?.passwordInput.placeholder}
+        label={t("passwordInput.label")}
+        placeholder={t("passwordInput.placeholder")}
         formOptions={{
           form,
           name: "password",
           validations: {
-            // required: content?.passwordInput.validations.required,
-            // minLength: {
-            //   value: 8,
-            //   message: String(content?.passwordInput.validations.minLength),
-            // },
-            // validate: {
-            //   hasUppercase: (value) =>
-            //     typeof value === "string"
-            //       ? /[A-Z]/.test(value) ||
-            //         String(content?.passwordInput.validations.hasUppercase)
-            //       : String(content?.passwordInput.validations.hasUppercase),
-            //   hasLowercase: (value) =>
-            //     typeof value === "string"
-            //       ? /[a-z]/.test(value) ||
-            //         String(content?.passwordInput.validations.hasLowercase)
-            //       : String(content?.passwordInput.validations.hasLowercase),
-            //   hasNumber: (value) =>
-            //     typeof value === "string"
-            //       ? /[0-9]/.test(value) ||
-            //         String(content?.passwordInput.validations.hasNumber)
-            //       : String(content?.passwordInput.validations.hasNumber),
-            //   hasSymbol: (value) =>
-            //     typeof value === "string"
-            //       ? /[!@#$&/*]/.test(value) ||
-            //         String(content?.passwordInput.validations.hasSymbol)
-            //       : String(content?.passwordInput.validations.hasSymbol),
-            // },
+            required: t("passwordInput.validations.required"),
+            minLength: {
+              value: 8,
+              message: t("passwordInput.validations.minLength"),
+            },
+            validate: {
+              hasUppercase: (value) =>
+                typeof value === "string"
+                  ? /[A-Z]/.test(value) ||
+                    t("passwordInput.validations.hasUppercase")
+                  : t("passwordInput.validations.hasUppercase"),
+              hasLowercase: (value) =>
+                typeof value === "string"
+                  ? /[a-z]/.test(value) ||
+                    t("passwordInput.validations.hasLowercase")
+                  : t("passwordInput.validations.hasLowercase"),
+              hasNumber: (value) =>
+                typeof value === "string"
+                  ? /[0-9]/.test(value) ||
+                    t("passwordInput.validations.hasNumber")
+                  : t("passwordInput.validations.hasNumber"),
+              hasSymbol: (value) =>
+                typeof value === "string"
+                  ? /[!@#$&/*]/.test(value) ||
+                    t("passwordInput.validations.hasSymbol")
+                  : t("passwordInput.validations.hasSymbol"),
+            },
           },
         }}
         className="mb-8"
       />
       <Box className="my-4 flex flex-col gap-2">
-        <ValidationField text={""} valid={password?.length >= 8} />
-        <ValidationField text={""} valid={/[A-Z]/.test(password || "")} />
-        <ValidationField text={""} valid={/[a-z]/.test(password || "")} />
-        <ValidationField text={""} valid={/[0-9]/.test(password || "")} />
-        <ValidationField text={""} valid={/[!@#$&/*]/.test(password || "")} />
+        <ValidationField
+          text={t("validations.minLength")}
+          valid={password?.length >= 8}
+        />
+        <ValidationField
+          text={t("validations.hasUppercase")}
+          valid={/[A-Z]/.test(password || "")}
+        />
+        <ValidationField
+          text={t("validations.hasLowercase")}
+          valid={/[a-z]/.test(password || "")}
+        />
+        <ValidationField
+          text={t("validations.hasNumber")}
+          valid={/[0-9]/.test(password || "")}
+        />
+        <ValidationField
+          text={t("validations.hasSymbol")}
+          valid={/[!@#$&/*]/.test(password || "")}
+        />
       </Box>
 
       <InputPassword
-        // label={String(content?.confirmPasswordInput.label)}
+        label={t("confirmPasswordInput.label")}
         className="mt-8 md:mt-0"
-        // placeholder={String(content?.confirmPasswordInput.placeholder)}
+        placeholder={t("confirmPasswordInput.placeholder")}
         formOptions={{
           form,
           name: "confirmPassword",
           validations: {
-            required: String(),
-            // content?.confirmPasswordInput.validations.required
-            // validate: (value) =>
-            //   value === form.getValues("password") ||
-            //   String(content?.confirmPasswordInput.validations.validate),
+            required: t("confirmPasswordInput.validations.required"),
+            validate: (value) =>
+              value === form.getValues("password") ||
+              t("confirmPasswordInput.validations.validate"),
           },
         }}
       />
@@ -102,14 +118,14 @@ export const FormAdminPasswordForm = ({
           type="button"
           onClick={() => setSteps(ERegisterAdminSteps.DATA)}
         >
-          {/* {content?.buttons.back} */}
+          {t("buttons.back")}
         </Button>
         <Button
           color="secondary"
           disabled={!form.formState.isValid}
           isLoading={isLoading}
         >
-          {/* {content?.buttons.submit} */}
+          {t("buttons.submit")}
         </Button>
       </Box>
     </form>

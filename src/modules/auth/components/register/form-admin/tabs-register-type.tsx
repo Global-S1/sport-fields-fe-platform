@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Dispatch, SetStateAction } from "react";
 import clsx from "../../../../../libs/clsx";
 import { Box } from "../../../../../shared/components/box/box.component";
@@ -9,6 +10,8 @@ interface Props {
 }
 
 export const TabsRegisterType = ({ setTypeSelected, typeSelected }: Props) => {
+  const t = useTranslations("auth.register.tabs");
+
   return (
     <Box className="max-w-md xl:max-w-xl w-full mx-auto mt-12 relative flex items-center rounded-lg font-semibold shadow-lg py-2">
       <Box
@@ -26,7 +29,7 @@ export const TabsRegisterType = ({ setTypeSelected, typeSelected }: Props) => {
           setTypeSelected(ERegisterType.CUSTOMER);
         }}
       >
-        {/* {content?.customer} */}
+        {t("customer")}
       </button>
       <button
         className={clsx(
@@ -37,7 +40,7 @@ export const TabsRegisterType = ({ setTypeSelected, typeSelected }: Props) => {
           setTypeSelected(ERegisterType.ADMIN);
         }}
       >
-        {/* {content?.admin} */}
+        {t("admin")}
       </button>
     </Box>
   );

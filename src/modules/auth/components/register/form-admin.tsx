@@ -1,5 +1,7 @@
 "use client";
 import { usePending } from "@/shared/hooks/usePending";
+import { useCustomRouter } from "@/shared/hooks/useRouter";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import clsx from "../../../../libs/clsx";
@@ -11,11 +13,13 @@ import { FormAdminPasswordForm } from "./form-admin/password-form";
 
 export const RegisterFormAdmin = () => {
   const { isPending } = usePending();
+  const [error] = useState("");
+  const t = useTranslations("auth.register.admin");
   const [steps, setSteps] = useState<ERegisterAdminSteps>(
     ERegisterAdminSteps.DATA
   );
 
-  // const navigate = useNavigate();
+  const router = useCustomRouter();
   const form = useForm<IRegisterAdminFields>({
     mode: "onChange",
     shouldUnregister: false,
@@ -33,13 +37,14 @@ export const RegisterFormAdmin = () => {
 
   const onSubmit = async () => {
     // Llamar a los server actions
+    router.push("auth");
   };
 
   return (
     <Box className="pb-4">
       <Box>
         <h1 className="text-clip bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent text-2xl font-semibold text-center mb-4">
-          {/* {content?.title} */}
+          {t("title")}
         </h1>
       </Box>
 
@@ -71,22 +76,17 @@ export const RegisterFormAdmin = () => {
         ))}
       </Box>
 
-      {/* {error && (
+      {error && (
         <Box className="w-full max-w-xl mx-auto bg-red-500 text-white text-center text-sm font-medium rounded-xl my-4 p-2">
           {error}
         </Box>
-      )} */}
+      )}
 
       {steps === ERegisterAdminSteps.DATA && (
-        <FormAdminDataForm
-          // content={content?.formAdminDataForm}
-          form={form}
-          setSteps={setSteps}
-        />
+        <FormAdminDataForm form={form} setSteps={setSteps} />
       )}
       {steps === ERegisterAdminSteps.PASSWORD && (
         <FormAdminPasswordForm
-          // content={content?.formAdminPasswordForm}
           form={form}
           onSubmit={onSubmit}
           isLoading={isPending}

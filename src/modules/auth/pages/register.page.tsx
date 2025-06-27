@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { Box } from "@/shared/components/box/box.component";
 import { Logo } from "@/shared/components/logo/logo.component";
 import { AnimatePresence, motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { MdArrowBack } from "react-icons/md";
 import { RegisterFormAdmin } from "../components/register/form-admin";
@@ -12,6 +13,7 @@ import { RegisterFormCustomer } from "../components/register/form-customer";
 import { ERegisterType } from "../enums/register.enum";
 
 export const RegisterPage = () => {
+  const t = useTranslations("auth.register");
   const [typeSelected, setTypeSelected] = useState<ERegisterType>(
     ERegisterType.CUSTOMER
   );
@@ -23,7 +25,7 @@ export const RegisterPage = () => {
         <Link href={"/auth"} className="absolute group left-12 top-16">
           <Box className="flex items-center gap-1">
             <MdArrowBack className="group-hover:w-0 duration-200" />
-            {/* <span className="font-semibold">{content?.back}</span> */}
+            <span className="font-semibold">{t("back")}</span>
           </Box>
           <Box className="h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-greenLemon-600 to-blueSport-500 duration-200"></Box>
         </Link>
