@@ -1,31 +1,16 @@
 import { Link } from "@/i18n/navigation";
-import { usePending } from "@/shared/hooks/usePending";
-import { useCustomRouter } from "@/shared/hooks/useRouter";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { Box } from "../../../../shared/components/box/box.component";
 import { Button } from "../../../../shared/components/button/button.component";
 import { InputCheckbox } from "../../../../shared/components/input/input-checkbox.component";
 import { InputPassword } from "../../../../shared/components/input/input-password.component";
 import { Input } from "../../../../shared/components/input/input.component";
-import { IRegisterCustomersFields } from "../../interfaces/register-form.interface";
-
-// const { registerCustomer } = AuthService();
+import useRegisterCustomer from "../../hooks/useRegisterCustomer";
 
 export const RegisterFormCustomer = () => {
-  const { isPending } = usePending();
-  const [error] = useState("");
+  const { isPending, error, form, registerCustomerSubmit } =
+    useRegisterCustomer();
   const t = useTranslations("auth.register.customer");
-  const router = useCustomRouter();
-  const form = useForm<IRegisterCustomersFields>({
-    mode: "onChange",
-  });
-
-  const onSubmit = async () => {
-    // server actions
-    router.push("auth");
-  };
 
   return (
     <Box>
@@ -44,7 +29,7 @@ export const RegisterFormCustomer = () => {
 
       <form
         className="my-4 grid grid-cols-1 md:grid-cols-2 md:gap-4 max-w-2xl mx-auto"
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(registerCustomerSubmit)}
       >
         <Input
           label={t("form.nameInput.label")}
