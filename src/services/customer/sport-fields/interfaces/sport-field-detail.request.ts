@@ -1,5 +1,3 @@
-import { ILocationCoords } from "../../../../shared/interfaces/geolocation.interface";
-
 export interface ISportFieldDetailAddFavorite {
   userUuid: string;
   productUuid: string;
@@ -13,6 +11,6 @@ export interface ISportFieldDetailRemoveFavorite {
 
 export interface ISportFieldDetailRequets {
   uuid: string;
-  location: ILocationCoords | undefined;
+  location: any;
   token: string;
 }
