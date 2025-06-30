@@ -76,3 +76,25 @@
 
   --color-danger-600: #9e000d;
 }
+
+@layer utilities {
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-fade::-webkit-scrollbar {
+    height: 6px;
+  }
+  .scrollbar-fade::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 10px;
+  }
+  .group:hover .scrollbar-fade::-webkit-scrollbar-thumb {
+    background-color: #4b5563; /* gray-700 */
+  }
+}
