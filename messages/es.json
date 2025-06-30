@@ -640,5 +640,44 @@
         }
       }
     }
+  },
+  "profile": {
+    "title": "Mi Perfil",
+    "profileData": {
+      "buttons": {
+        "closeSesion": "Cerrar sesión",
+        "changeAdministrator": "Cambiar a Administrador"
+      },
+      "editModal": {
+        "title": "Editar Pefil",
+        "buttons": {
+          "cancel": "Cancelar",
+          "save": "Guardar"
+        },
+        "inputName": {
+          "label": "Nombre",
+          "required": "Este campo es requerido"
+        },
+        "inputLastName": {
+          "label": "Apellido",
+          "required": "Este campo es requerido"
+        },
+        "inputCellphone": {
+          "label": "Número de telefono",
+          "required": "Este campo es requerido"
+        }
+      },
+      "editAvatar": {
+        "buttons": {
+          "save": "Guardar"
+        },
+        "inputFile": {
+          "required": "Este campo es requerido"
+        }
+      }
+    },
+    "favorites": {
+      "title": "Canchas favoritas"
+    }
   }
 }
