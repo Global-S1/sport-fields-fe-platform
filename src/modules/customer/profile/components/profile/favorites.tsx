@@ -1,20 +1,22 @@
+"use client";
+import { Box } from "@/shared/components/box/box.component";
+import { IProfileFavorites } from "../../interfaces/profile.interface";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { Text } from "@/shared/components/text/text.component";
+import { Link } from "@/i18n/navigation";
+import { ProfileService } from "@/services/customer/profile/profile.service";
+import { useTranslations } from "next-intl";
+import { useAtomValue } from "jotai";
+import { currentUserAtom } from "@/shared/store/global.store";
+
 const { getFavorites } = ProfileService();
 
-interface Props {
-  content: IProfileFavoritesContent;
-}
-
-export const ProfileFavorites = ({ content }: Props) => {
+export const ProfileFavorites = async () => {
+  const t = useTranslations("profile");
   const user = useAtomValue(currentUserAtom);
-  const { data } = useQuery({
-    queryKey: ["profile-favorites"],
-    queryFn: async () => {
-      if (!user) return null;
-      return (await getFavorites(user.userUuid)).data
-        .items as IProfileFavorites[];
-    },
-    enabled: !!user,
-  });
+  const data = user?.userUuid
+    ? ((await getFavorites(user.userUuid)).data.items as IProfileFavorites[])
+    : null;
 
   return (
     <Box className="container mx-auto px-4">
@@ -22,13 +24,13 @@ export const ProfileFavorites = ({ content }: Props) => {
         <i className="block w-fit p-2 rounded-full bg-red-400 ">
           <IoMdHeartEmpty className="text-white" size={25} />
         </i>
-        <Text className="font-bold">{content.title}</Text>
+        <Text className="font-bold">{t("title")}</Text>
       </Box>
       <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data &&
           data.map((item, index) => (
             <Link
-              to={`/details/${item.productUuid}`}
+              href={`/details/${item.productUuid}`}
               key={index}
               className="p-4 rounded-lg shadow-lg flex gap-4"
             >

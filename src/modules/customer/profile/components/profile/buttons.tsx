@@ -1,22 +1,29 @@
-import { IProfileDataContent } from "../../interfaces/profile-content.interface";
+"use client";
+import { Box } from "@/shared/components/box/box.component";
+import { Button } from "@/shared/components/button/button.component";
+import { useLogout } from "@/shared/hooks/useLogOut";
+import { useCustomRouter } from "@/shared/hooks/useRouter";
+import { isAdminAtom } from "@/shared/store/global.store";
+import { useAtomValue } from "jotai";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import { use } from "react";
 
-interface Props {
-  content: IProfileDataContent;
-}
+export const ProfileButtons = () => {
+  const t = useTranslations("profile");
 
-export const ProfileButtons = ({ content }: Props) => {
   const {
     logout,
     states: { isPendingLogout },
   } = useLogout();
 
-  const navigate = useNavigate();
+  const navigate = useCustomRouter();
 
   const isAdmin = useAtomValue(isAdminAtom);
 
   const changueAdministratorView = () => {
     if (isAdmin) {
-      navigate("/admin");
+      navigate.push("/admin");
     }
   };
 
@@ -29,7 +36,7 @@ export const ProfileButtons = ({ content }: Props) => {
             className="w-fit"
             onClick={changueAdministratorView}
           >
-            {content.buttons.changeAdministrator}
+            {t("buttons.changeAdministrator")}
           </Button>
         )}
 
@@ -40,14 +47,14 @@ export const ProfileButtons = ({ content }: Props) => {
           onClick={logout}
           isLoading={isPendingLogout}
         >
-          {content.buttons.closeSesion}
+          {t("buttons.closeSesion")}
         </Button>
       </Box>
 
       <Box className="hidden md:flex space-x-4 mb-6">
         {isAdmin && (
           <Button color="secondary" onClick={changueAdministratorView}>
-            {content.buttons.changeAdministrator}
+            {t("buttons.changeAdministrator")}
           </Button>
         )}
 
@@ -57,7 +64,7 @@ export const ProfileButtons = ({ content }: Props) => {
           onClick={logout}
           isLoading={isPendingLogout}
         >
-          {content.buttons.closeSesion}
+          {t("buttons.closeSesion")}
         </Button>
       </Box>
     </>

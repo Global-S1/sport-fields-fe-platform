@@ -2,12 +2,17 @@
 import { use } from "react";
 import { IProfileDataContent } from "../../interfaces/profile-content.interface";
 import { useTranslations } from "next-intl";
+import { Box } from "@/shared/components/box/box.component";
+import { TbCamera } from "react-icons/tb";
+import { BiSolidEdit } from "react-icons/bi";
+import { ProfileButtons } from "./buttons";
+import ModalData from "./modal-data";
+import ModalPhoto from "./modal-foto";
+import { useEditProfile } from "../../hooks/useEditProfile";
+import { useAtomValue } from "jotai";
+import { currentUserAtom } from "@/shared/store/global.store";
 
-interface Props {
-  content: IProfileDataContent;
-}
-
-export const ProfileAvatar = ({ content }: Props) => {
+export const ProfileAvatar = () => {
   const t = useTranslations("profile");
   const user = useAtomValue(currentUserAtom);
   const {
@@ -68,7 +73,7 @@ export const ProfileAvatar = ({ content }: Props) => {
             </Box>
           </Box>
 
-          <ProfileButtons content={content} />
+          <ProfileButtons />
         </Box>
       </Box>
 
@@ -77,7 +82,6 @@ export const ProfileAvatar = ({ content }: Props) => {
         toggleOpen={dataModal.toggleModal}
         form={editForm}
         handleSubmit={sendData}
-        content={content}
       />
 
       <ModalPhoto
@@ -85,7 +89,6 @@ export const ProfileAvatar = ({ content }: Props) => {
         toglleOpen={photoModal.toggleModal}
         form={photoForm}
         handleSubmit={sendUserImg}
-        content={content}
       />
     </Box>
   );
