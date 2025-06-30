@@ -11,5 +11,6 @@ export const useCustomRouter = () => {
 
   return {
     push,
+    back: router.back,
   };
 };

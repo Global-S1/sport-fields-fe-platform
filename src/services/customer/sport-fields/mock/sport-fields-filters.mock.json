@@ -1,0 +1,279 @@
+{
+  "success": true,
+  "kindMessage": "OK",
+  "data": [
+    {
+      "name": "Sport type",
+      "code": "category",
+      "subFilters": [
+        {
+          "name": "Voley",
+          "value": "f71dc127-af17-4f94-b4a2-f461e6ec588d",
+          "icon": "icon:Voley"
+        },
+        {
+          "name": "Basquet",
+          "value": "fc1bf213-1c80-4094-888b-02c7fd8de366",
+          "icon": "icon:Basquet"
+        },
+        {
+          "name": "Tennis",
+          "value": "e0681e32-0aec-42e3-9fe0-ea9c11e7bab8",
+          "icon": "icon:Tennis"
+        }
+      ]
+    },
+    {
+      "name": "Location",
+      "code": "district",
+      "subFilters": [
+        {
+          "name": "Lima",
+          "value": "Lima"
+        },
+        {
+          "name": "El Agustino",
+          "value": "El Agustino"
+        },
+        {
+          "name": "La molina",
+          "value": "La molina"
+        },
+        {
+          "name": "San Miguel",
+          "value": "San Miguel"
+        },
+        {
+          "name": "Ate",
+          "value": "Ate"
+        },
+        {
+          "name": "Surco",
+          "value": "Surco"
+        },
+        {
+          "name": "Lurin",
+          "value": "Lurin"
+        },
+        {
+          "name": "Bellavista",
+          "value": "Bellavista"
+        },
+        {
+          "name": "Qaz",
+          "value": "Qaz"
+        },
+        {
+          "name": "HUalga",
+          "value": "HUalga"
+        },
+        {
+          "name": "Lurín",
+          "value": "Lurín"
+        },
+        {
+          "name": "Ascope",
+          "value": "Ascope"
+        }
+      ]
+    },
+    {
+      "name": "Field size",
+      "code": "sizeField",
+      "subFilters": [
+        {
+          "name": "72 m²",
+          "value": "72"
+        },
+        {
+          "name": "56 m²",
+          "value": "56"
+        },
+        {
+          "name": "120 m²",
+          "value": "120"
+        },
+        {
+          "name": "2 m²",
+          "value": "2"
+        },
+        {
+          "name": "70 m²",
+          "value": "70"
+        },
+        {
+          "name": "96 m²",
+          "value": "96"
+        },
+        {
+          "name": "48 m²",
+          "value": "48"
+        },
+        {
+          "name": "312 m²",
+          "value": "312"
+        },
+        {
+          "name": "90 m²",
+          "value": "90"
+        },
+        {
+          "name": "1200 m²",
+          "value": "1200"
+        },
+        {
+          "name": "276 m²",
+          "value": "276"
+        },
+        {
+          "name": "4050 m²",
+          "value": "4050"
+        },
+        {
+          "name": "52 m²",
+          "value": "52"
+        },
+        {
+          "name": "3000 m²",
+          "value": "3000"
+        },
+        {
+          "name": "6 m²",
+          "value": "6"
+        },
+        {
+          "name": "920 m²",
+          "value": "920"
+        },
+        {
+          "name": "4000 m²",
+          "value": "4000"
+        },
+        {
+          "name": "100 m²",
+          "value": "100"
+        },
+        {
+          "name": "200 m²",
+          "value": "200"
+        },
+        {
+          "name": "9000 m²",
+          "value": "9000"
+        },
+        {
+          "name": "4930 m²",
+          "value": "4930"
+        },
+        {
+          "name": "140 m²",
+          "value": "140"
+        }
+      ]
+    },
+    {
+      "name": "Choose hours",
+      "code": "hour",
+      "subFilters": [
+        {
+          "name": "2:00",
+          "value": "2"
+        },
+        {
+          "name": "3:00",
+          "value": "3"
+        },
+        {
+          "name": "4:00",
+          "value": "4"
+        },
+        {
+          "name": "5:00",
+          "value": "5"
+        },
+        {
+          "name": "6:00",
+          "value": "6"
+        },
+        {
+          "name": "7:00",
+          "value": "7"
+        },
+        {
+          "name": "8:00",
+          "value": "8"
+        },
+        {
+          "name": "9:00",
+          "value": "9"
+        },
+        {
+          "name": "10:00",
+          "value": "10"
+        },
+        {
+          "name": "11:00",
+          "value": "11"
+        },
+        {
+          "name": "12:00",
+          "value": "12"
+        },
+        {
+          "name": "13:00",
+          "value": "13"
+        },
+        {
+          "name": "14:00",
+          "value": "14"
+        },
+        {
+          "name": "15:00",
+          "value": "15"
+        },
+        {
+          "name": "16:00",
+          "value": "16"
+        },
+        {
+          "name": "17:00",
+          "value": "17"
+        },
+        {
+          "name": "18:00",
+          "value": "18"
+        },
+        {
+          "name": "19:00",
+          "value": "19"
+        },
+        {
+          "name": "20:00",
+          "value": "20"
+        },
+        {
+          "name": "21:00",
+          "value": "21"
+        },
+        {
+          "name": "22:00",
+          "value": "22"
+        },
+        {
+          "name": "23:00",
+          "value": "23"
+        },
+        {
+          "name": "24:00",
+          "value": "24"
+        }
+      ]
+    }
+  ],
+  "httpCode": 200,
+  "timeLapse": {
+    "started": "2025-06-13 22:58:54",
+    "ended": "2025-06-13 22:58:54",
+    "duration": 44.473913
+  }
+}
