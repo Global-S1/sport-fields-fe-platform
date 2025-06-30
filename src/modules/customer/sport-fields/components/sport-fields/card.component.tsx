@@ -1,6 +1,8 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
+import { getDistanceBetweenCoords } from "@/shared/helpers/get-distance-cords.helper";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { LoaderIcon } from "react-hot-toast";
 import { MdStar } from "react-icons/md";
@@ -12,10 +14,10 @@ import { ISportField } from "../../interfaces/sport-fields.interface";
 interface Props {
   // content?: ISportFieldCardContent;
   sportField: ISportField;
-  // cords?: ILocationCoords;
 }
 
 export const SportFieldCard = ({ sportField }: Props) => {
+  const t = useTranslations("public.pages.sportFields.card");
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -25,15 +27,21 @@ export const SportFieldCard = ({ sportField }: Props) => {
     averageRate,
     productsUuid,
     availablePromotionDatetime,
+    latitude,
+    longitude,
+    pricePerHour,
   } = sportField;
 
-  // const distance =
-  //   cords && latitude && longitude
-  //     ? getDistanceBetweenCoords(cords, {
-  //         latitude: Number(latitude),
-  //         longitude: Number(longitude),
-  //       })
-  //     : null;
+  const distance =
+    latitude && longitude
+      ? getDistanceBetweenCoords(
+          { latitude: 0, longitude: 0 },
+          {
+            latitude: Number(latitude),
+            longitude: Number(longitude),
+          }
+        )
+      : null;
   return (
     <Link
       href={`/details/${productsUuid}`}
@@ -73,17 +81,17 @@ export const SportFieldCard = ({ sportField }: Props) => {
             </Text>
           )}
         </Box>
-        {/* {distance && (
+        {distance && (
           <Text className="line-clamp-1 font-semibold text-gray-500">{`${distance.toFixed(
             2
-          )} ${content?.distance}`}</Text>
-        )} */}
+          )} ${t("distance")}`}</Text>
+        )}
         <Box className="flex justify-between items-center mt-2">
           <Text className="line-clamp-1 text-gray-500">
             {availablePromotionDatetime}
           </Text>
           <Text className="line-clamp-1 font-bold">
-            {/* {pricePerHour} {content?.price} */}
+            {pricePerHour} {t("price")}
           </Text>
         </Box>
       </Box>

@@ -7,6 +7,7 @@ import { ESportFieldFiltersCode } from "../../enums/sport-field.enum";
 import { useQueryParams } from "@/shared/hooks/useQueryParams";
 import { useUpdateQueryParams } from "@/shared/hooks/useUpdateQueryParams";
 import { useSetAtom } from "jotai";
+import { useTranslations } from "next-intl";
 import { IoMdOptions } from "react-icons/io";
 import clsx from "../../../../../libs/clsx";
 import { filtersModalAtom } from "../../store/sport-field.store";
@@ -15,6 +16,7 @@ export const SearcherSportField = () => {
   const updateQueryParams = useUpdateQueryParams();
   const queryParams = useQueryParams();
   const setFilterModal = useSetAtom(filtersModalAtom);
+  const t = useTranslations("public.pages.sportFields.searcher");
 
   const toggleFilterModal = () => setFilterModal((prev) => !prev);
 
@@ -43,13 +45,15 @@ export const SearcherSportField = () => {
           name="search"
           id="search"
           className="bg-transparent w-fit outline-none"
-          // placeholder={content?.placeholder}
+          placeholder={t("placeholder")}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
       </label>
       <button
-        className={clsx("rounded-lg duration-200 rotate-90")}
+        className={clsx(
+          "rounded-lg duration-200 rotate-90 cursor-pointer text-gray-600 hover:text-primary-400"
+        )}
         onClick={toggleFilterModal}
       >
         <IoMdOptions size={32} />

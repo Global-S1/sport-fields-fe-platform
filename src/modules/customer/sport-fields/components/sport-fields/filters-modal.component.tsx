@@ -4,9 +4,9 @@ import { useQueryParams } from "@/shared/hooks/useQueryParams";
 import { useRemoveQueryParams } from "@/shared/hooks/useRemoveQueryParams";
 import { useUpdateQueryParams } from "@/shared/hooks/useUpdateQueryParams";
 import { useAtom } from "jotai";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
-import { DateValueType } from "react-tailwindcss-datepicker";
 import { Modal } from "../../../../../shared/components/modal/modal.component";
 import { ESportFieldFiltersCode } from "../../enums/sport-field.enum";
 import { filtersModalAtom } from "../../store/sport-field.store";
@@ -19,15 +19,13 @@ interface Props {
 }
 
 export const SportFieldsFiltersModal = ({ filters }: Props) => {
+  const t = useTranslations("public.pages.sportFields.filterModal");
   const params = useQueryParams();
   const update = useUpdateQueryParams();
   const removeParams = useRemoveQueryParams();
   const [isOpen, setIsOpen] = useAtom(filtersModalAtom);
   const onClose = () => setIsOpen((prev) => !prev);
-  const [date, setDate] = useState<DateValueType>({
-    startDate: null,
-    endDate: null,
-  });
+  const [date, setDate] = useState<Date>(new Date());
 
   const changueFilterSelected = (
     code: ESportFieldFiltersCode,
@@ -58,7 +56,7 @@ export const SportFieldsFiltersModal = ({ filters }: Props) => {
           <FaArrowLeft />
         </button>
         <h3 className="mt-6 text-2xl font-semibold pb-4 border-b-2 border-main-300">
-          {/* {content?.title} */}
+          {t("title")}
         </h3>
       </header>
 
@@ -91,8 +89,8 @@ export const SportFieldsFiltersModal = ({ filters }: Props) => {
       </section>
 
       <footer className="flex flex-wrap justify-between mt-4">
-        <button className="underline" onClick={cleanFilters}>
-          {/* {content?.buttons.delete} */}
+        <button className="underline cursor-pointer" onClick={cleanFilters}>
+          {t("buttons.delete")}
         </button>
       </footer>
     </Modal>
