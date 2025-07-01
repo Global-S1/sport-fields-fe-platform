@@ -1,6 +1,6 @@
 "use client";
+
 import { SubmitHandler, UseFormReturn } from "react-hook-form";
-import { IProfileDataContent } from "../../interfaces/profile-content.interface";
 import { IPhotoForm } from "../../interfaces/profile-form.interface";
 import { Button } from "@/shared/components/button/button.component";
 import { Input } from "@/shared/components/input/input.component";
@@ -20,7 +20,7 @@ export default function ModalPhoto({
   form,
   handleSubmit,
 }: Props) {
-  const t = useTranslations("profile");
+  const t = useTranslations("profile.profileData.editAvatar");
   return (
     <Modal isOpen={isOpen} onClose={toglleOpen}>
       <form
@@ -32,11 +32,11 @@ export default function ModalPhoto({
           formOptions={{
             form,
             name: "userImg",
-            validations: { required: t("editAvatar.inputFile.required") },
+            validations: { required: t("inputFile.required") },
           }}
         />
 
-        <Button>{t("editAvatar.buttons.save")}</Button>
+        <Button>{t("buttons.save")}</Button>
       </form>
     </Modal>
   );

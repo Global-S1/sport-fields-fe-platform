@@ -34,7 +34,7 @@ export const ProfileButtons = () => {
             className="w-fit"
             onClick={changueAdministratorView}
           >
-            {t("buttons.changeAdministrator")}
+            {t("profileData.buttons.changeAdministrator")}
           </Button>
         )}
 
@@ -45,14 +45,14 @@ export const ProfileButtons = () => {
           onClick={logout}
           isLoading={isPendingLogout}
         >
-          {t("buttons.closeSesion")}
+          {t("profileData.buttons.closeSesion")}
         </Button>
       </Box>
 
       <Box className="hidden md:flex space-x-4 mb-6">
         {isAdmin && (
           <Button color="secondary" onClick={changueAdministratorView}>
-            {t("buttons.changeAdministrator")}
+            {t("profileData.buttons.changeAdministrator")}
           </Button>
         )}
 
@@ -62,7 +62,7 @@ export const ProfileButtons = () => {
           onClick={logout}
           isLoading={isPendingLogout}
         >
-          {t("buttons.closeSesion")}
+          {t("profileData.buttons.closeSesion")}
         </Button>
       </Box>
     </>

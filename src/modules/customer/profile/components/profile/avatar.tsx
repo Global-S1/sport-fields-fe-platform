@@ -1,6 +1,5 @@
 "use client";
-import { use } from "react";
-import { IProfileDataContent } from "../../interfaces/profile-content.interface";
+
 import { useTranslations } from "next-intl";
 import { Box } from "@/shared/components/box/box.component";
 import { TbCamera } from "react-icons/tb";
@@ -13,7 +12,6 @@ import { useAtomValue } from "jotai";
 import { currentUserAtom } from "@/shared/store/global.store";
 
 export const ProfileAvatar = () => {
-  const t = useTranslations("profile");
   const user = useAtomValue(currentUserAtom);
   const {
     form: { editForm, photoForm },

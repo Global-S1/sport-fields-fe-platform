@@ -1,12 +1,14 @@
-import { ProfileService } from "@/services/customer/profile/profile.service";
 import { IPhotoForm, IProfileForm } from "../interfaces/profile-form.interface";
 import { TOAST_MODE } from "@/shared/components/toast/toast.config";
 import { triggerToast } from "@/shared/components/toast/toast-component";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useModal } from "@/shared/components/modal/hooks/useModal";
 import { useAtom, useAtomValue } from "jotai";
-
-const { updateData, updateImage } = ProfileService();
+import {
+  updateData,
+  updateImage,
+} from "@/services/customer/profile/profile.service";
+import { currentTokenAtom, currentUserAtom } from "@/shared/store/global.store";
 
 export const useEditProfile = () => {
   const [isOpenPhoto, toggleModalPhoto] = useModal();
@@ -18,41 +20,41 @@ export const useEditProfile = () => {
   const editForm = useForm<IProfileForm>();
   const photoForm = useForm<IPhotoForm>();
 
-  const photoMutation = useMutation({
-    mutationFn: async (data: IPhotoForm) =>
-      await updateImage(user?.userUuid || "", data, token),
-    onSuccess: (userImg: string) => {
-      toggleModalPhoto();
-      photoForm.reset();
-      if (user) {
-        setUser({ ...user, userImg });
+  const photoSubmit = async (data: IPhotoForm) => {
+    try {
+      const userImg = await updateImage(user?.userUuid || "", data, token);
+      if (userImg) {
+        toggleModalPhoto();
+        photoForm.reset();
+        if (user) {
+          setUser({ ...user, userImg: userImg });
+        }
       }
-    },
-    onError: (error: any) => {
-      triggerToast({ mode: TOAST_MODE.ERROR, title: error.message });
-    },
-  });
+    } catch (error) {
+      triggerToast({ mode: TOAST_MODE.ERROR, title: (error as any).message });
+    }
+  };
 
   const sendUserImg: SubmitHandler<IPhotoForm> = async (data) =>
-    photoMutation.mutate(data);
+    await photoSubmit(data);
 
-  const dataMutation = useMutation({
-    mutationFn: async (data: IProfileForm) =>
-      await updateData(user?.userUuid || "", data, token),
-    onSuccess: (data) => {
-      toggleModalEdit();
-      editForm.reset();
-      if (user) {
-        setUser({ ...user, ...data });
+  const dataSubmit = async (data: IProfileForm) => {
+    try {
+      const userData = await updateData(user?.userUuid || "", data, token);
+      if (userData) {
+        toggleModalEdit();
+        editForm.reset();
+        if (user) {
+          setUser({ ...user, ...userData });
+        }
       }
-    },
-    onError: (error: any) => {
-      triggerToast({ mode: TOAST_MODE.ERROR, title: error.message });
-    },
-  });
+    } catch (error) {
+      triggerToast({ mode: TOAST_MODE.ERROR, title: (error as any).message });
+    }
+  };
 
   const sendData: SubmitHandler<IProfileForm> = async (data) =>
-    dataMutation.mutate(data);
+    await dataSubmit(data);
 
   return {
     form: { editForm, photoForm },

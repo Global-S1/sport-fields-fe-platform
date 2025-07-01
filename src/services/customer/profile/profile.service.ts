@@ -8,60 +8,56 @@ import {
   IProfileRequest,
 } from "./interfaces/profile.form.request";
 
-export const ProfileService = () => {
-  const getFavorites = async (userUuid: string) => {
-    const response = await privateInstance.get<
-      IHttpDataItems<IGetFavoritesResponse>
-    >(`/products/find-product-profile-favorite-by-user-uuid/${userUuid}`);
+export const getFavorites = async (userUuid: string) => {
+  const response = await privateInstance.get<
+    IHttpDataItems<IGetFavoritesResponse>
+  >(`/products/find-product-profile-favorite-by-user-uuid/${userUuid}`);
 
-    return response.data;
-  };
+  return response.data;
+};
 
-  const updateImage = async (
-    userUuid: string,
-    body: IPhotoRequest,
-    token: string
-  ) => {
-    const formData = new FormData();
-    formData.append("userImg", body.userImg[0]);
+export const updateImage = async (
+  userUuid: string,
+  body: IPhotoRequest,
+  token: string
+) => {
+  const formData = new FormData();
+  formData.append("userImg", body.userImg[0]);
 
-    const response = await privateInstance.patch(
-      `/user/update-user-image/${userUuid}`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-        withCredentials: true,
-      }
-    );
+  const response = await privateInstance.patch(
+    `/user/update-user-image/${userUuid}`,
+    formData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      withCredentials: true,
+    }
+  );
 
-    return response.data.data.userImg;
-  };
+  return response.data.data.userImg;
+};
 
-  const updateData = async (
-    userUuid: string,
-    body: IProfileRequest,
-    token: string
-  ) => {
-    const formData = new FormData();
-    formData.append("data", JSON.stringify(body));
+export const updateData = async (
+  userUuid: string,
+  body: IProfileRequest,
+  token: string
+) => {
+  const formData = new FormData();
+  formData.append("data", JSON.stringify(body));
 
-    const response = await privateInstance.patch(
-      `/user/update-users/${userUuid}`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-        withCredentials: true,
-      }
-    );
+  const response = await privateInstance.patch(
+    `/user/update-users/${userUuid}`,
+    formData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      withCredentials: true,
+    }
+  );
 
-    return response.data.data.item;
-  };
-
-  return { getFavorites, updateImage, updateData };
+  return response.data.data.item;
 };
