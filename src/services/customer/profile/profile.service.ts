@@ -1,7 +1,6 @@
 "use server";
 
 import { privateInstance } from "@/libs/axios";
-import { IProfileContent } from "@/modules/customer/profile/interfaces/profile-content.interface";
 import { IHttpDataItems } from "@/shared/interfaces/http-request-response.interface";
 import { IGetFavoritesResponse } from "./interfaces/get-favorites.response";
 import {

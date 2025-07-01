@@ -1,13 +1,11 @@
 "use client";
 import { Box } from "@/shared/components/box/box.component";
 import { Button } from "@/shared/components/button/button.component";
-import { useLogout } from "@/shared/hooks/useLogOut";
+import { useLogout } from "@/shared/hooks/useLogout";
 import { useCustomRouter } from "@/shared/hooks/useRouter";
 import { isAdminAtom } from "@/shared/store/global.store";
 import { useAtomValue } from "jotai";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-import { use } from "react";
 
 export const ProfileButtons = () => {
   const t = useTranslations("profile");
