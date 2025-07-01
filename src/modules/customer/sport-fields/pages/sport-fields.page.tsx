@@ -19,121 +19,11 @@ const SportFields = async (props: PageProps) => {
     dateInit: queryParams.startDate?.toString() ?? null,
     dateEnd: queryParams.endDate?.toString() ?? null,
     categoryUuid: queryParams.category,
+    hour: queryParams.hour,
+    sizeField: queryParams.size_field,
   });
 
-  // const [searchParams, setSearchParams] = useSearchParams();
-
-  // const [filtersModal, toggleFiltersModal] = useModal();
-
-  // const [filtersSelected, setFiltersSelected] = useState<
-  //   Partial<Record<ESportFieldFiltersCode, string>>
-  // >({
-  //   [ESportFieldFiltersCode.CATEGORY]: "",
-  //   [ESportFieldFiltersCode.DISTRICT]: "",
-  //   [ESportFieldFiltersCode.HOUR]: "",
-  //   [ESportFieldFiltersCode.SIZE_FIELD]: "",
-  //   [ESportFieldFiltersCode.SIZE]: "12",
-  //   [ESportFieldFiltersCode.NAME]: "",
-  // });
   // const [location, setLocation] = useState<ILocationCoords>();
-
-  // const loaderRef = useRef<HTMLDivElement | null>(null);
-
-  // function changueFilterSelected(
-  //   filter: ESportFieldFiltersCode,
-  //   value: string
-  // ) {
-  //   setFiltersSelected((prev) => {
-  //     const updated = { ...prev, [filter]: value };
-
-  //     const newParams = new URLSearchParams(searchParams);
-
-  //     if (value) {
-  //       newParams.set(filter, value);
-  //     } else {
-  //       newParams.delete(filter);
-  //     }
-
-  //     setSearchParams(newParams);
-
-  //     return updated;
-  //   });
-  // }
-
-  // function cleanFilters() {
-  //   const initialFilters = {
-  //     [ESportFieldFiltersCode.CATEGORY]: "",
-  //     [ESportFieldFiltersCode.DISTRICT]: "",
-  //     [ESportFieldFiltersCode.HOUR]: "",
-  //     [ESportFieldFiltersCode.SIZE_FIELD]: "",
-  //     [ESportFieldFiltersCode.NAME]: "",
-  //     [ESportFieldFiltersCode.SIZE]: "12",
-  //   };
-
-  //   setFiltersSelected(initialFilters);
-  //   setDate({ startDate: null, endDate: null });
-
-  //   const preserved = [ESportFieldFiltersCode.LAT, ESportFieldFiltersCode.LNG];
-  //   const newParams = new URLSearchParams();
-
-  //   Object.entries(initialFilters).forEach(([key, val]) => {
-  //     if (val) newParams.set(key, val);
-  //   });
-
-  //   preserved.forEach((key) => {
-  //     const val = searchParams.get(key);
-  //     if (val) newParams.set(key, val);
-  //   });
-
-  //   setSearchParams(newParams);
-  // }
-
-  // const { data: content } = useQuery({
-  //   queryKey: ["sport-field-content"],
-  //   queryFn: async () => {
-  //     return await getSportFieldContent(lang);
-  //   },
-  // });
-
-  // const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-  //   useInfiniteQuery({
-  //     queryKey: ["sport-fields", filtersSelected, date],
-  //     initialPageParam: 1,
-  //     queryFn: async ({ pageParam = 1 }) =>
-  //       await getSportFields({
-  //         ...filtersSelected,
-  //         dateInit: date?.startDate?.toLocaleDateString() ?? null,
-  //         dateEnd: date?.endDate?.toLocaleDateString() ?? null,
-  //         page: String(pageParam),
-  //         categoryUuid: filtersSelected[ESportFieldFiltersCode.CATEGORY],
-  //       }),
-  //     getNextPageParam: (lastPage) => {
-  //       const nextPage = Number(lastPage.data.pagination?.page) + 1;
-
-  //       return nextPage <= Number(lastPage.data.pagination?.totalPages)
-  //         ? nextPage
-  //         : undefined;
-  //     },
-  //   });
-
-  // useEffect(() => {
-  //   const params = Object.fromEntries(searchParams.entries());
-
-  //   const initialFilters: Partial<Record<ESportFieldFiltersCode, string>> = {};
-
-  //   Object.values(ESportFieldFiltersCode).forEach((key) => {
-  //     if (params[key]) {
-  //       initialFilters[key] = params[key];
-  //     }
-  //   });
-
-  //   setFiltersSelected((prev) => ({ ...prev, ...initialFilters }));
-
-  //   setDate({
-  //     startDate: params.dateInit ? new Date(params.dateInit) : null,
-  //     endDate: params.dateEnd ? new Date(params.dateEnd) : null,
-  //   });
-  // }, []);
 
   // useEffect(() => {
   //   const fetchLocation = async () => {
@@ -151,26 +41,6 @@ const SportFields = async (props: PageProps) => {
 
   //   fetchLocation();
   // }, []);
-
-  // useEffect(() => {
-  //   if (!loaderRef.current) return;
-
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       const first = entries[0];
-  //       if (first.isIntersecting && hasNextPage && !isFetchingNextPage) {
-  //         fetchNextPage();
-  //       }
-  //     },
-  //     { threshold: 1.0 }
-  //   );
-
-  //   observer.observe(loaderRef.current);
-
-  //   return () => {
-  //     if (loaderRef.current) observer.unobserve(loaderRef.current);
-  //   };
-  // }, [loaderRef, fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return (
     <>

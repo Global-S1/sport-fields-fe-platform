@@ -1,6 +1,9 @@
-import { deleteCookie, getCookie, setCookie } from "@/shared/helpers/cookies.helper";
+import {
+  deleteCookie,
+  getCookie,
+  setCookie,
+} from "@/shared/helpers/cookies.helper";
 import { atomWithStorage } from "jotai/utils";
-
 
 export interface CookieOptions {
   expires?: number | Date;
@@ -15,21 +18,27 @@ export function atomWithCookie<T>(
   initialValue: T,
   options: CookieOptions = {}
 ) {
-  const rawValue = getCookie(key);
-  let parsedValue: T;
+  let parsedValue: T = initialValue;
 
-  try {
-    parsedValue = rawValue ? JSON.parse(rawValue) : initialValue;
-  } catch {
-    parsedValue = initialValue;
-  }
+  if (typeof window !== "undefined") {
+    const rawValue = getCookie(key);
+    try {
+      parsedValue = rawValue ? JSON.parse(rawValue) : initialValue;
+    } catch {
+      parsedValue = initialValue;
+    }
 
-  if (!rawValue) {
-    setCookie(key, JSON.stringify(initialValue), options);
+    if (!rawValue && initialValue !== null && initialValue !== undefined) {
+      setCookie(key, JSON.stringify(initialValue), options);
+    }
   }
 
   return atomWithStorage<T>("cookie:" + key, parsedValue, {
     getItem: () => {
+      if (typeof window === "undefined") {
+        return initialValue;
+      }
+
       const cookieValue = getCookie(key);
       if (cookieValue) {
         try {
@@ -41,13 +50,21 @@ export function atomWithCookie<T>(
       return initialValue;
     },
     setItem: (_, value) => {
-      const encoded = JSON.stringify(value);
-      setCookie(key, encoded, options);
+      if (typeof window !== "undefined") {
+        const encoded = JSON.stringify(value);
+        setCookie(key, encoded, options);
+      }
     },
     removeItem: () => {
-      deleteCookie(key, options.path);
+      if (typeof window !== "undefined") {
+        deleteCookie(key, options.path);
+      }
     },
     subscribe: (_, callback) => {
+      if (typeof window === "undefined") {
+        return () => {};
+      }
+
       const timeout = setTimeout(() => {
         const cookieValue = getCookie(key);
         if (cookieValue) {

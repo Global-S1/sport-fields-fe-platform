@@ -38,30 +38,3 @@ export function setCookie(
 export const deleteCookie = (key: string, path = "/") => {
   document.cookie = `${key}=; path=${path}; max-age=0`;
 };
-
-// export function getCookie(name: string): string | undefined {
-//   if (typeof document === "undefined") return undefined;
-//   const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-//   return match ? decodeURIComponent(match[2]) : undefined;
-// }
-
-// export function setCookie(name: string, value: string, options: any = {}) {
-//   if (typeof document === "undefined") return;
-//   let cookieStr = `${name}=${encodeURIComponent(value)}`;
-//   if (options.expires) {
-//     const expires =
-//       typeof options.expires === "number"
-//         ? new Date(Date.now() + options.expires * 864e5)
-//         : options.expires;
-//     cookieStr += `; expires=${expires.toUTCString()}`;
-//   }
-//   if (options.path) cookieStr += `; path=${options.path}`;
-//   if (options.domain) cookieStr += `; domain=${options.domain}`;
-//   if (options.secure) cookieStr += `; secure`;
-//   if (options.sameSite) cookieStr += `; samesite=${options.sameSite}`;
-//   document.cookie = cookieStr;
-// }
-
-// export function deleteCookie(name: string, path?: string) {
-//   setCookie(name, "", { path, expires: new Date(0) });
-// }

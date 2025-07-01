@@ -1,11 +1,14 @@
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
-import { ICodeForm, IEmailForm, IPasswordForm } from "../interfaces/recovery-password-forms.interface";
+import {
+  ICodeForm,
+  IEmailForm,
+  IPasswordForm,
+} from "../interfaces/recovery-password-forms.interface";
 
 export function useGetRecoveryPasswordContent() {
-  // Usa directamente las traducciones de next-intl
   const t = useTranslations("auth.recoveryPassword");
-  
+
   const emailForm = useForm<IEmailForm>({
     defaultValues: { email: "" },
   });
@@ -22,7 +25,6 @@ export function useGetRecoveryPasswordContent() {
     mode: "onChange",
   });
 
-  // Construye el contenido desde las traducciones
   const recoveryPasswordContent = {
     sendEmail: {
       title: t("sendEmail.title"),
@@ -41,6 +43,7 @@ export function useGetRecoveryPasswordContent() {
       description: t("sendCode.description"),
       codeInput: {
         required: t("sendCode.codeInput.required"),
+        minLength: t("sendCode.codeInput.minLength"),
       },
       sendButton: t("sendCode.sendButton"),
       success: t("sendCode.success"),

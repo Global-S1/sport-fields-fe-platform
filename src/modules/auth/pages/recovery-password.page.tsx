@@ -6,14 +6,12 @@ import { RecoveryPasswordStep } from "../enums/recovery-password.enum";
 import { EmailFormComponent } from "../components/recovery-password/email-form.component";
 import { CodeFormComponent } from "../components/recovery-password/code-form.component";
 import { PasswordFormComponent } from "../components/recovery-password/password-form.component";
-// import AuthLayout from "@/app/[locale]/auth/layout";
 
 export const RecoveryPasswordPage = () => {
   const [step] = useAtom(recoveryPasswordStepAtom);
   const { content, forms } = useGetRecoveryPasswordContent();
 
   return (
-    // <AuthLayout>
     <>
       {step === RecoveryPasswordStep.EMAIL && (
         <EmailFormComponent
@@ -36,6 +34,5 @@ export const RecoveryPasswordPage = () => {
         />
       )}
     </>
-    // </AuthLayout>
   );
 };

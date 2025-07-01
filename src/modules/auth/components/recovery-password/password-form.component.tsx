@@ -38,7 +38,11 @@ export const PasswordFormComponent = ({ content, form }: Props) => {
   const onSubmit = async (data: IPasswordForm) => {
     setIsPending(true);
     try {
-      await sendPasswordAction({ ...data, email, token: code });
+      await sendPasswordAction({
+        newPassword: data.newPassword,
+        email,
+        token: code,
+      });
       triggerToast({
         mode: TOAST_MODE.SUCCESS,
         title: content?.success || "",

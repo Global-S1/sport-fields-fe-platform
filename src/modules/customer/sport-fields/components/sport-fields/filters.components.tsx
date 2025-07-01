@@ -38,7 +38,7 @@ export const SportFieldFilters = ({ filters }: Props) => {
                 update(ESportFieldFiltersCode.CATEGORY, value);
               }}
               className={clsx(
-                "flex items-center gap-1",
+                "flex items-center gap-1 cursor-pointer",
                 sport.value == params[ESportFieldFiltersCode.CATEGORY]
                   ? "text-primary-400"
                   : "text-gray-600"
@@ -56,7 +56,7 @@ export const SportFieldFilters = ({ filters }: Props) => {
             <button
               key={index}
               className={clsx(
-                "text-nowrap px-2 text-sm rounded-lg shadow-md",
+                "text-nowrap px-2 text-sm rounded-lg shadow-md cursor-pointer",
                 params[ESportFieldFiltersCode.DISTRICT] === site.value
                   ? "bg-primary-400 text-white"
                   : "bg-white"

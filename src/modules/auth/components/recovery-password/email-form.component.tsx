@@ -8,7 +8,10 @@ import { Text } from "@/shared/components/text/text.component";
 import { Input } from "@/shared/components/input/input.component";
 import { Button } from "@/shared/components/button/button.component";
 import { useSetAtom } from "jotai";
-import { recoveryPasswordStepAtom, recoveryPasswordEmailAtom } from "../../store/recovery-password.store";
+import {
+  recoveryPasswordStepAtom,
+  recoveryPasswordEmailAtom,
+} from "../../store/recovery-password.store";
 import { RecoveryPasswordStep } from "../../enums/recovery-password.enum";
 import { TOAST_MODE } from "@/shared/components/toast/toast.config";
 import { triggerToast } from "@/shared/components/toast/toast-component";
@@ -30,13 +33,14 @@ export const EmailFormComponent = ({ content, form }: Props) => {
       setStep(RecoveryPasswordStep.CODE);
       triggerToast({
         mode: TOAST_MODE.SUCCESS,
-        title: content?.success || "¡Correo enviado!",
+        title: content?.success || "",
       });
     } catch (error: any) {
-      const errorMessage = error?.message || 'Error al enviar el correo de recuperación';
-      triggerToast({ 
-        mode: TOAST_MODE.ERROR, 
-        title: errorMessage 
+      const errorMessage =
+        error?.message || "";
+      triggerToast({
+        mode: TOAST_MODE.ERROR,
+        title: errorMessage,
       });
     }
   };

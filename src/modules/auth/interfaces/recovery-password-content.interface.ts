@@ -18,6 +18,7 @@ export interface ISendCodeContent {
   success: string;
   codeInput: {
     required: string;
+    minLength: string;
   };
 }
 

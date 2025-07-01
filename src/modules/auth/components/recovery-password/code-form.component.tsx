@@ -3,7 +3,11 @@ import { Controller, UseFormReturn } from "react-hook-form";
 import { ICodeForm } from "../../interfaces/recovery-password-forms.interface";
 import { ISendCodeContent } from "../../interfaces/recovery-password-content.interface";
 import { useAtomValue, useSetAtom } from "jotai";
-import { recoveryPasswordStepAtom, recoveryPasswordEmailAtom, recoveryPasswordCodeAtom } from "../../store/recovery-password.store";
+import {
+  recoveryPasswordStepAtom,
+  recoveryPasswordEmailAtom,
+  recoveryPasswordCodeAtom,
+} from "../../store/recovery-password.store";
 import { BackButton } from "./back-button";
 import { Box } from "@/shared/components/box/box.component";
 import { Heading } from "@/shared/components/text/heading.component";
@@ -71,7 +75,13 @@ export const CodeFormComponent = ({ content, form }: Props) => {
           <Controller
             name="code"
             control={form.control}
-            rules={{ required: content?.codeInput.required }}
+            rules={{
+              required: content?.codeInput.required,
+              minLength: {
+                value: 6,
+                message: content?.codeInput.minLength || "",
+              },
+            }}
             render={({ field, formState }) => (
               <InputOtp
                 errors={formState.errors}
