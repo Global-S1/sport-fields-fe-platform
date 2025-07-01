@@ -12,7 +12,6 @@ import { Text } from "../../../../../shared/components/text/text.component";
 import { ISportField } from "../../interfaces/sport-fields.interface";
 
 interface Props {
-  // content?: ISportFieldCardContent;
   sportField: ISportField;
 }
 

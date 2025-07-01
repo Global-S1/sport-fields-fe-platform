@@ -38,8 +38,6 @@ export default function FilterDistrict({
             .includes(search.toLocaleLowerCase())
         );
 
-  console.log(filterSelected);
-
   return (
     <>
       <article>

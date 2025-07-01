@@ -6,6 +6,7 @@ import {
   PopoverTrigger,
 } from "@radix-ui/react-popover";
 import { format } from "date-fns";
+import { useTranslations } from "next-intl";
 import { Dispatch, SetStateAction } from "react";
 import { LuCalendar } from "react-icons/lu";
 
@@ -15,6 +16,8 @@ interface Props {
 }
 
 export default function FilterDate({ date, changeDate }: Props) {
+  const t = useTranslations("public.pages.sportFields.filterModal.filters");
+
   return (
     <article>
       <h4 className="text-lg font-semibold mb-3">Escoger fechas</h4>
@@ -27,11 +30,7 @@ export default function FilterDate({ date, changeDate }: Props) {
             className="w-full py-2 h-auto px-4 justify-start border border-main-800 rounded-xl"
           >
             <LuCalendar />
-            {date ? (
-              format(date, "dd/MM/yyyy")
-            ) : (
-              <span>Seleccionar una fecha</span>
-            )}
+            {date ? format(date, "dd/MM/yyyy") : <span>{t("date")}</span>}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto mt-1">
