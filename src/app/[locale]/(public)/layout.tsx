@@ -9,7 +9,7 @@ interface Props {
 
 export default function CustomerLayout({ children }: Props) {
   return (
-    <Box className={clsx("relative min-h-screen h-screen md:pt-[94px]")}>
+    <Box className={clsx("relative min-h-screen h-screen pt-[94px]")}>
       <CustomerNavbar />
       <Box
         className="fixed left-0 top-0 bg-[url(/bg-pattern.png)] w-screen h-screen -z-20 opacity-[0.15]"
@@ -18,9 +18,7 @@ export default function CustomerLayout({ children }: Props) {
         }}
       />
 
-      <Box
-        className={clsx("grow relative container mx-auto h-full min:h-full")}
-      >
+      <Box className={clsx("grow relative container mx-auto  p-4 pt-12")}>
         {children}
       </Box>
     </Box>
