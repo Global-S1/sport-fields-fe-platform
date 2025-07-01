@@ -45,12 +45,12 @@ export default function FilterDistrict({
         <button
           onClick={onOpenChangue}
           className={`w-full py-2 px-4 text-left border border-main-800 rounded-xl ${
-            filterSelected !== ""
+            filterSelected !== "" && filterSelected
               ? " text-white bg-primary-400"
               : " text-main-800"
           }`}
         >
-          {filterSelected !== ""
+          {filterSelected !== "" && filterSelected
             ? filter.subFilters.find(
                 (subFilter) => subFilter.value === filterSelected
               )?.name

@@ -617,6 +617,9 @@
         },
         "filterModal": {
           "title": "Filtros",
+          "filters": {
+            "date": "Seleccionar una fecha"
+          },
           "buttons": {
             "delete": "Borrar",
             "apply": "Aplicar filtros"
