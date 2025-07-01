@@ -2,9 +2,8 @@
 import { Controller, UseFormReturn } from "react-hook-form";
 import { ICodeForm } from "../../interfaces/recovery-password-forms.interface";
 import { ISendCodeContent } from "../../interfaces/recovery-password-content.interface";
-import { useAtomValue } from "jotai";
-import { recoveryPasswordEmailAtom } from "../../store/recovery-password.store";
-import { useSendCode } from "@/shared/hooks/useSendCode";
+import { useAtomValue, useSetAtom } from "jotai";
+import { recoveryPasswordStepAtom, recoveryPasswordEmailAtom, recoveryPasswordCodeAtom } from "../../store/recovery-password.store";
 import { BackButton } from "./back-button";
 import { Box } from "@/shared/components/box/box.component";
 import { Heading } from "@/shared/components/text/heading.component";
@@ -12,6 +11,10 @@ import { Text } from "@/shared/components/text/text.component";
 import { RecoveryPasswordStep } from "../../enums/recovery-password.enum";
 import InputOtp from "@/shared/components/input/input-otp.component";
 import { Button } from "@/shared/components/button/button.component";
+import { triggerToast } from "@/shared/components/toast/toast-component";
+import { TOAST_MODE } from "@/shared/components/toast/toast.config";
+import { useState } from "react";
+import { sendCodeAction } from "../../actions/send-code.action";
 
 interface Props {
   form: UseFormReturn<ICodeForm>;
@@ -20,11 +23,26 @@ interface Props {
 
 export const CodeFormComponent = ({ content, form }: Props) => {
   const email = useAtomValue(recoveryPasswordEmailAtom);
+  const setStep = useSetAtom(recoveryPasswordStepAtom);
+  const setCode = useSetAtom(recoveryPasswordCodeAtom);
+  const [isPending, setIsPending] = useState(false);
 
-  const {
-    handlers: { sendCodeOnSubmit },
-    states: { isPending },
-  } = useSendCode(content);
+  const onSubmit = async (data: ICodeForm) => {
+    setIsPending(true);
+    try {
+      const token = await sendCodeAction({ ...data, email });
+      setCode(token);
+      setStep(RecoveryPasswordStep.PASSWORD);
+      triggerToast({
+        mode: TOAST_MODE.SUCCESS,
+        title: content?.success || "",
+      });
+    } catch (error: any) {
+      triggerToast({ mode: TOAST_MODE.ERROR, title: error.message });
+    } finally {
+      setIsPending(false);
+    }
+  };
 
   return (
     <>
@@ -47,7 +65,7 @@ export const CodeFormComponent = ({ content, form }: Props) => {
       <form
         className="flex flex-col w-full"
         autoComplete="off"
-        onSubmit={form.handleSubmit(sendCodeOnSubmit)}
+        onSubmit={form.handleSubmit(onSubmit)}
       >
         <Box className="mb-4 w-full">
           <Controller

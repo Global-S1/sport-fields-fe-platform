@@ -5,7 +5,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const AuthLayout = ({ children }: Props) => {
+export default function AuthLayout({ children }: Props) {
   return (
     <Box className="flex h-screen">
       <Box className="hidden md:flex md:w-[35%] h-full bg-gradient-to-br from-greenLemon-600 to-blueSport-500 items-center justify-center">
@@ -22,4 +22,4 @@ export const AuthLayout = ({ children }: Props) => {
       </Box>
     </Box>
   );
-};
+}

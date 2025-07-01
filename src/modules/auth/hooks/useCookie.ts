@@ -1,5 +1,6 @@
+import { deleteCookie, getCookie, setCookie } from "@/shared/helpers/cookies.helper";
 import { atomWithStorage } from "jotai/utils";
-import Cookies from "js-cookie";
+
 
 export interface CookieOptions {
   expires?: number | Date;
@@ -14,7 +15,7 @@ export function atomWithCookie<T>(
   initialValue: T,
   options: CookieOptions = {}
 ) {
-  const rawValue = Cookies.get(key);
+  const rawValue = getCookie(key);
   let parsedValue: T;
 
   try {
@@ -24,12 +25,12 @@ export function atomWithCookie<T>(
   }
 
   if (!rawValue) {
-    Cookies.set(key, JSON.stringify(initialValue), options);
+    setCookie(key, JSON.stringify(initialValue), options);
   }
 
   return atomWithStorage<T>("cookie:" + key, parsedValue, {
     getItem: () => {
-      const cookieValue = Cookies.get(key);
+      const cookieValue = getCookie(key);
       if (cookieValue) {
         try {
           return JSON.parse(cookieValue) as T;
@@ -41,14 +42,14 @@ export function atomWithCookie<T>(
     },
     setItem: (_, value) => {
       const encoded = JSON.stringify(value);
-      Cookies.set(key, encoded, options);
+      setCookie(key, encoded, options);
     },
     removeItem: () => {
-      Cookies.remove(key, { path: options.path });
+      deleteCookie(key, options.path);
     },
     subscribe: (_, callback) => {
       const timeout = setTimeout(() => {
-        const cookieValue = Cookies.get(key);
+        const cookieValue = getCookie(key);
         if (cookieValue) {
           try {
             const parsed = JSON.parse(cookieValue);

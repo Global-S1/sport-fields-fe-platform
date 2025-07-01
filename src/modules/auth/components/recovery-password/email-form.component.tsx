@@ -7,7 +7,12 @@ import { Heading } from "@/shared/components/text/heading.component";
 import { Text } from "@/shared/components/text/text.component";
 import { Input } from "@/shared/components/input/input.component";
 import { Button } from "@/shared/components/button/button.component";
-import { useSendEmail } from "../../hooks/useSendEmail";
+import { useSetAtom } from "jotai";
+import { recoveryPasswordStepAtom, recoveryPasswordEmailAtom } from "../../store/recovery-password.store";
+import { RecoveryPasswordStep } from "../../enums/recovery-password.enum";
+import { TOAST_MODE } from "@/shared/components/toast/toast.config";
+import { triggerToast } from "@/shared/components/toast/toast-component";
+import { sendRecoveryEmail } from "../../actions/send-recovery-email.action";
 
 interface Props {
   content: ISendEmailContent | undefined;
@@ -15,10 +20,26 @@ interface Props {
 }
 
 export const EmailFormComponent = ({ content, form }: Props) => {
-  const {
-    handlers: { sendEmailOnSubmit },
-    states: { isPending },
-  } = useSendEmail(content);
+  const setStep = useSetAtom(recoveryPasswordStepAtom);
+  const setEmail = useSetAtom(recoveryPasswordEmailAtom);
+
+  const onSubmit = async (data: IEmailForm) => {
+    try {
+      await sendRecoveryEmail(data);
+      setEmail(data.email);
+      setStep(RecoveryPasswordStep.CODE);
+      triggerToast({
+        mode: TOAST_MODE.SUCCESS,
+        title: content?.success || "¡Correo enviado!",
+      });
+    } catch (error: any) {
+      const errorMessage = error?.message || 'Error al enviar el correo de recuperación';
+      triggerToast({ 
+        mode: TOAST_MODE.ERROR, 
+        title: errorMessage 
+      });
+    }
+  };
 
   return (
     <>
@@ -33,7 +54,7 @@ export const EmailFormComponent = ({ content, form }: Props) => {
 
       <form
         className="flex flex-col w-full"
-        onSubmit={form.handleSubmit(sendEmailOnSubmit)}
+        onSubmit={form.handleSubmit(onSubmit)}
       >
         <Box className="mb-4 w-full">
           <Input
@@ -59,7 +80,6 @@ export const EmailFormComponent = ({ content, form }: Props) => {
           type="submit"
           color="secondary"
           className="w-full mt-6 disabled:bg-salem-400 !rounded-full"
-          isLoading={isPending}
         >
           {content?.sendButton}
         </Button>

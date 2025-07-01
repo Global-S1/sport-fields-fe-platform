@@ -1,0 +1,35 @@
+{
+  "host": {
+    "booking": "https://reserva.canchasdeportivas.pe/videna",
+    "to": "Videna San Luis",
+    "distance": "3.5 km",
+    "address": "San miguel, Borja",
+    "avatar": "https://sm.ign.com/t/ign_pk/cover/a/avatar-gen/avatar-generations_rpge.600.jpg",
+    "fullname": "Jesús Sanchez"
+  },
+  "field": {
+    "services": [
+      {
+        "title": "Iluminación LED",
+        "service": "Campo iluminado para juegos nocturnos"
+      },
+      {
+        "title": "Estacionamiento",
+        "service": "Zona de parqueo gratuita para visitantes"
+      },
+      {
+        "title": "Vestuarios",
+        "service": "Camerinos con duchas y lockers"
+      }
+    ],
+    "comments": "Excelente campo sintético con mantenimiento regular y buena atención al cliente.",
+    "dates": "7 al 30 de enero",
+    "price": "S/ 150.00",
+    "title": "Cancha de Fútbol 7 - VIDENA",
+    "images": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqea88zlg775XwW3ELmL7apQRZJg3vAkSfwQ&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqea88zlg775XwW3ELmL7apQRZJg3vAkSfwQ&s",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqea88zlg775XwW3ELmL7apQRZJg3vAkSfwQ&s"
+    ]
+  }
+}

@@ -3,7 +3,6 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import "../globals.css";
-import QueryProvider from "@/shared/providers/query-client-provider";
 
 export default async function RootLayout({
   children,
@@ -20,10 +19,8 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body>
-        <QueryProvider>
-          <Toaster />
-          <NextIntlClientProvider>{children}</NextIntlClientProvider>
-        </QueryProvider>
+        <Toaster />
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>
   );
