@@ -220,7 +220,8 @@
         "sendButton": "Verificar",
         "success": "Otp-Code correcto",
         "codeInput": {
-          "required": "Se debe ingresar un código"
+          "required": "Se debe ingresar un código",
+          "minLength": "El código debe tener 6 dígitos"
         }
       },
       "changuePassword": {
@@ -413,8 +414,12 @@
                 "description": {
                   "label": "Descripción"
                 },
-                "details": { "label": "Detalles" },
-                "opinions": { "label": "Opiniones" }
+                "details": {
+                  "label": "Detalles"
+                },
+                "opinions": {
+                  "label": "Opiniones"
+                }
               }
             },
             "text": {
@@ -599,7 +604,13 @@
       "pagination": {
         "size": "Vista general",
         "rows": "filas",
-        "sizes": [10, 20, 30, 40, 50]
+        "sizes": [
+          10,
+          20,
+          30,
+          40,
+          50
+        ]
       }
     }
   },
