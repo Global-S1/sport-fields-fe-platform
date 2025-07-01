@@ -73,6 +73,7 @@ export const SportFieldsFiltersModal = ({ filters }: Props) => {
           code={ESportFieldFiltersCode.DISTRICT}
           filters={filters}
         />
+        {/* Falta agregar la funcionalidad de filtrar por fechas */}
         <FilterDate date={date} changeDate={setDate} />
         <FilterOptions
           changueFilterSelected={changueFilterSelected}
