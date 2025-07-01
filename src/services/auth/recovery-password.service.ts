@@ -39,12 +39,7 @@ export const RecoveryPasswordService = () => {
 
       return response.data.data.item.token;
     } catch (error: any) {
-      const errorMessage =
-        error?.response?.data?.kindMessage ||
-        error?.response?.data?.message ||
-        error?.message ||
-        "Error al verificar el código";
-      throw new Error(errorMessage);
+      throw new Error((error as any).response.data.kindMessage);
     }
   };
 
