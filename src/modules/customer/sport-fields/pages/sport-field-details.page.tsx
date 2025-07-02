@@ -2,7 +2,7 @@ import { Carousel } from "@/shared/components/carousel/carousel.component";
 import { PageProps } from "@/shared/interfaces/types";
 import { FavoriteButton } from "../components/sport-field-details/favorite-button";
 
-const SportFieldDetailsPage = async (props: PageProps) => {
+const SportFieldDetailsPage = async ({}: PageProps) => {
   // const {
   //   data,
   //   states: { isLoading, isError },
