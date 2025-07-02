@@ -7,12 +7,11 @@ import {
 } from "@radix-ui/react-popover";
 import { format } from "date-fns";
 import { useTranslations } from "next-intl";
-import { Dispatch, SetStateAction } from "react";
 import { LuCalendar } from "react-icons/lu";
 
 interface Props {
   date: Date;
-  changeDate: Dispatch<SetStateAction<Date>>;
+  changeDate: (date: Date) => void;
 }
 
 export default function FilterDate({ date, changeDate }: Props) {
