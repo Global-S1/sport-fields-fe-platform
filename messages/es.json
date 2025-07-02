@@ -604,13 +604,7 @@
       "pagination": {
         "size": "Vista general",
         "rows": "filas",
-        "sizes": [
-          10,
-          20,
-          30,
-          40,
-          50
-        ]
+        "sizes": [10, 20, 30, 40, 50]
       }
     }
   },
@@ -647,7 +641,8 @@
           "location": "Dirección",
           "owner": "Anfitrión",
           "includes": "Incluye",
-          "hour": "la hora"
+          "hour": "la hora",
+          "successful_reservations": "reservas exitosas"
         },
         "buttons": {
           "reservation": "Reservar"

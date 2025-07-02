@@ -6,7 +6,6 @@ import { ISportFieldDetails } from "../../../modules/customer/sport-fields/inter
 import {
   ISportFieldDetailAddFavorite,
   ISportFieldDetailRemoveFavorite,
-  ISportFieldDetailRequets,
 } from "./interfaces/sport-field-detail.request";
 import { SportFieldFiltersRequest } from "./interfaces/sport-field-filters.request";
 import { SportFieldFilterResponse } from "./interfaces/sport-field-filters.response";
@@ -23,25 +22,11 @@ export const getSportFields = async (filters?: SportFieldFiltersRequest) => {
   return response.data;
 };
 
-export const getSportFieldByUuid = async ({
-  location,
-  token,
-  uuid,
-}: ISportFieldDetailRequets) => {
+export const getSportFieldByUuid = async (uuid: string) => {
   try {
-    let url = `find-product-by-uuid/${uuid}`;
-
-    if (token === "") {
-      url = "public/" + url;
-    }
-
-    if (location) {
-      url += `?latitude=${location.latitude}&longitude=${location.longitude}`;
-    }
-
     const response = await publicInstance.get<IHttpData<ISportFieldDetails>>(
-      `products/${url}`,
-      { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
+      `products/public/find-product-by-uuid/${uuid}`,
+      {}
     );
     return response.data.data;
   } catch (error) {
