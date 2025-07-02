@@ -3,6 +3,7 @@ import { SportFieldFilterResponse } from "@/services/customer/sport-fields/inter
 import { useQueryParams } from "@/shared/hooks/useQueryParams";
 import { useRemoveQueryParams } from "@/shared/hooks/useRemoveQueryParams";
 import { useUpdateQueryParams } from "@/shared/hooks/useUpdateQueryParams";
+import { format } from "date-fns";
 import { useAtom } from "jotai";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -26,6 +27,12 @@ export const SportFieldsFiltersModal = ({ filters }: Props) => {
   const [isOpen, setIsOpen] = useAtom(filtersModalAtom);
   const onClose = () => setIsOpen((prev) => !prev);
   const [date, setDate] = useState<Date>(new Date());
+
+  const changueDate = (date: Date) => {
+    update(ESportFieldFiltersCode.DATE_INIT, format(date, "yyyy/MM/dd"));
+    update(ESportFieldFiltersCode.DATE_END, format(date, "yyyy/MM/dd"));
+    setDate(date);
+  };
 
   const changueFilterSelected = (
     code: ESportFieldFiltersCode,
@@ -74,7 +81,7 @@ export const SportFieldsFiltersModal = ({ filters }: Props) => {
           filters={filters}
         />
         {/* Falta agregar la funcionalidad de filtrar por fechas */}
-        <FilterDate date={date} changeDate={setDate} />
+        <FilterDate date={date} changeDate={changueDate} />
         <FilterOptions
           changueFilterSelected={changueFilterSelected}
           filterSelected={params[ESportFieldFiltersCode.HOUR]}

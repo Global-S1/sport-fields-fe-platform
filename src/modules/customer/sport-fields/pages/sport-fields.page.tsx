@@ -4,16 +4,21 @@ import {
 } from "@/services/customer/sport-fields/sport-fields.service";
 import { Box } from "@/shared/components/box/box.component";
 import { PageProps } from "@/shared/interfaces/types";
+import { getTranslations } from "next-intl/server";
 import { SportFieldCard } from "../components/sport-fields/card.component";
 import { SportFieldsFiltersModal } from "../components/sport-fields/filters-modal.component";
 import { SportFieldFilters } from "../components/sport-fields/filters.components";
+import PaginationSportFields from "../components/sport-fields/pagination-sport-fields";
 import { SearcherSportField } from "../components/sport-fields/searcher.component";
 
 const SportFields = async (props: PageProps) => {
+  const t = await getTranslations("public.pages.sportFields");
   const queryParams = await props.searchParams;
 
   const filters = await getSportFieldFilters();
   const products = await getSportFields({
+    page: queryParams.page || "1",
+    size: queryParams.size || "12",
     name: queryParams.name,
     district: queryParams.district,
     dateInit: queryParams.startDate?.toString() ?? null,
@@ -22,25 +27,6 @@ const SportFields = async (props: PageProps) => {
     hour: queryParams.hour,
     sizeField: queryParams.size_field,
   });
-
-  // const [location, setLocation] = useState<ILocationCoords>();
-
-  // useEffect(() => {
-  //   const fetchLocation = async () => {
-  //     try {
-  //       const coords = await getCurrentLocation();
-  //       setLocation(coords);
-  //     } catch {
-  //       const content = await getSportFieldContent(lang);
-  //       triggerToast({
-  //         mode: TOAST_MODE.WARNING,
-  //         title: String(content?.request.errorLocation),
-  //       });
-  //     }
-  //   };
-
-  //   fetchLocation();
-  // }, []);
 
   return (
     <>
@@ -53,19 +39,23 @@ const SportFields = async (props: PageProps) => {
             <SportFieldCard
               key={`${product.productsUuid}-${i}`}
               sportField={product}
-              // cords={location}
             />
           ))}
       </Box>
-
       {!products.data.items.length && (
         <Box className="mt-4 w-full flex flex-col items-center">
           <img src="/empty-space.svg" alt="empty-space" className="h-72" />
           <p className="text-xl font-medium text-gray-500 text-center">
-            {/* {content?.request.noData} */}
+            {t("request.noData")}
           </p>
         </Box>
       )}
+
+      <PaginationSportFields
+        currentPage={products.data.pagination.page}
+        limit={products.pagination?.size || 12}
+        totalItems={products.data.pagination.totalItems}
+      />
     </>
   );
 };

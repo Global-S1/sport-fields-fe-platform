@@ -28,7 +28,7 @@ export default function FilterOptions({
           {filter.subFilters.map((subFilter, index) => (
             <span
               className={`py-2 px-4 border border-main-800 rounded-xl text-nowrap cursor-pointer ${
-                filterSelected === subFilter.value
+                filterSelected === subFilter.value.toString()
                   ? " text-white bg-primary-400"
                   : " text-main-800"
               }`}
