@@ -1,32 +1,33 @@
+import { getSportFieldByUuid } from "@/services/customer/sport-fields/sport-fields.service";
 import { Carousel } from "@/shared/components/carousel/carousel.component";
 import { PageProps } from "@/shared/interfaces/types";
+import { getTranslations } from "next-intl/server";
+import { BiCheckCircle } from "react-icons/bi";
+import BackButton from "../components/sport-field-details/back-button";
 import { FavoriteButton } from "../components/sport-field-details/favorite-button";
+import LocationSection from "../components/sport-field-details/location-section";
 
-const SportFieldDetailsPage = async ({}: PageProps) => {
-  // const {
-  //   data,
-  //   states: { isLoading, isError },
-  //   content,
-  // } = useProductDetail(params?.id || "");
+const SportFieldDetailsPage = async ({ params }: PageProps) => {
+  const t = await getTranslations("public.pages.sportFieldsDetail");
+  const uuid = (await params).uuid;
+  const product = await getSportFieldByUuid(uuid);
 
-  const images = [];
-
-  // const images = [
-  //   ...(data?.featureImage ? [data.featureImage] : []),
-  //   ...(data?.galery ?? []),
-  // ];
+  const images = [
+    ...(product?.featureImage ? [product.featureImage] : []),
+    ...(product?.galery ?? []),
+  ];
 
   if (!images.length) {
     images.push("/default-image.svg");
   }
 
-  // const direction = "";
+  let direction = "";
 
-  // if (data?.establishment.street && data.establishment.streetNumber) {
-  //   direction = `${data.establishment.department} - ${data.establishment.street} ${data.establishment.streetNumber}`;
-  // } else {
-  //   direction = `${data?.establishment.country} ${data?.establishment.department}`;
-  // }
+  if (product?.establishment.street && product.establishment.streetNumber) {
+    direction = `${product.establishment.department} - ${product.establishment.street} ${product.establishment.streetNumber}`;
+  } else {
+    direction = `${product?.establishment.country} ${product?.establishment.department}`;
+  }
 
   return (
     <>
@@ -42,7 +43,7 @@ const SportFieldDetailsPage = async ({}: PageProps) => {
                 className="object-scale-down "
                 imgClassName="object-scale-down"
               />
-              {/* <BackButton className="absolute top-2 left-2 md:hidden" /> */}
+              <BackButton />
               <FavoriteButton />
             </div>
 
@@ -51,19 +52,16 @@ const SportFieldDetailsPage = async ({}: PageProps) => {
                 <div className="lg:col-span-2 space-y-6">
                   <div>
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                      {/* {data.name} */}
-                      Proyecto
+                      {product.name}
                     </h1>
-                    {/* {data.distance && (
-                      <p className="text-gray-600 mb-1">
-                        {data.distance.replace("km", "")}{" "}
-                        {content?.text.distance}
-                      </p>
-                    )} */}
+
+                    <LocationSection
+                      latitude={product.establishment.latitude}
+                      longitude={product.establishment.longitude}
+                    />
 
                     <p className="text-sm text-gray-500">
-                      {/* {content?.text.location}: {direction} */}
-                      Dirección
+                      {t("text.location")}: {direction}
                     </p>
                   </div>
 
@@ -71,10 +69,8 @@ const SportFieldDetailsPage = async ({}: PageProps) => {
                     <div className="relative">
                       <div className="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
                         <img
-                          // src={data.user.userImg || "/default-image.svg"}
-                          // alt={data.user.name}
-                          src={"/default-image.svg"}
-                          alt={"Usuario"}
+                          src={product.user.userImg || "/default-image.svg"}
+                          alt={product.user.name}
                           width={48}
                           height={48}
                           className="w-full h-full object-cover"
@@ -83,22 +79,22 @@ const SportFieldDetailsPage = async ({}: PageProps) => {
                     </div>
                     <div>
                       <p className="font-medium text-gray-900">
-                        {/* {content?.text.owner}: {data.user.name}{" "}
-                        {data.user.lastName} */}
+                        {t("text.owner")}:{product.user.name}{" "}
+                        {product.user.lastName}
                       </p>
                       <p className="text-sm text-gray-500">
-                        {/* {data.successfulreservations} reserva exitosas */}
+                        {product.successfulreservations}{" "}
+                        {t("text.successful_reservations")}
                       </p>
                     </div>
                   </div>
 
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-4">
-                      {/* {content?.text.includes}: */}
-                      incluye
+                      {t("text.includes")}:
                     </h3>
                     <div className="space-y-3">
-                      {/* {data.establishmentExtraServices.map((service) => (
+                      {product.establishmentExtraServices.map((service) => (
                         <div
                           key={service.establishmentExtraServicesId}
                           className="flex items-center space-x-3"
@@ -108,7 +104,7 @@ const SportFieldDetailsPage = async ({}: PageProps) => {
                           </div>
                           <span className="text-gray-700">{service.name}</span>
                         </div>
-                      ))} */}
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -117,18 +113,15 @@ const SportFieldDetailsPage = async ({}: PageProps) => {
                   <div className="bg-gray-50 rounded-xl p-6 sticky top-8">
                     <div className="text-center mb-6">
                       <div className="text-3xl font-bold text-gray-900 mb-1">
-                        {/* S/ {data.pricePerHour}{" "} */}
-                        120
+                        S/ {product.pricePerHour}{" "}
                         <span className="text-lg font-normal text-gray-600">
-                          {/* {content?.text.hour} */}
-                          Por hora
+                          {t("text.hour")}
                         </span>
                       </div>
                     </div>
 
                     <button className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-4 rounded-lg text-lg transition-colors duration-200 shadow-sm">
-                      {/* {content?.buttons.reservation} */}
-                      Reservar
+                      {t("buttons.reservation")}
                     </button>
                   </div>
                 </div>
