@@ -10,7 +10,7 @@ export const login = async (data: IAuthLoginParams) => {
   try {
     const response = await publicInstance.post<
       IHttpDataItem<IAuthLoginResponse>
-    >("/security/login", data);
+    >("/security/login", data, { withCredentials: true });
 
     const setCookieHeader = response.headers["set-cookie"];
 

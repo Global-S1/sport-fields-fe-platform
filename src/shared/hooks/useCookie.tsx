@@ -1,44 +1,35 @@
-import {
-  deleteCookie,
-  getCookie,
-  setCookie,
-} from "@/shared/helpers/cookies.helper";
-import { atomWithStorage } from "jotai/utils";
+"use client";
 
-export interface CookieOptions {
-  expires?: number | Date;
+import { atomWithStorage } from "jotai/utils";
+import { deleteCookie, getCookie, setCookie } from "../helpers/cookies.helper";
+
+type CookieOptions = {
   path?: string;
-  domain?: string;
+  maxAge?: number;
   secure?: boolean;
   sameSite?: "Strict" | "Lax" | "None";
-}
+};
 
 export function atomWithCookie<T>(
   key: string,
   initialValue: T,
   options: CookieOptions = {}
 ) {
-  let parsedValue: T = initialValue;
+  const rawValue = getCookie(key);
+  let parsedValue: T;
 
-  if (typeof window !== "undefined") {
-    const rawValue = getCookie(key);
-    try {
-      parsedValue = rawValue ? JSON.parse(rawValue) : initialValue;
-    } catch {
-      parsedValue = initialValue;
-    }
+  try {
+    parsedValue = rawValue ? JSON.parse(rawValue) : initialValue;
+  } catch {
+    parsedValue = initialValue;
+  }
 
-    if (!rawValue && initialValue !== null && initialValue !== undefined) {
-      setCookie(key, JSON.stringify(initialValue), options);
-    }
+  if (!rawValue) {
+    setCookie(key, JSON.stringify(initialValue), options);
   }
 
   return atomWithStorage<T>("cookie:" + key, parsedValue, {
     getItem: () => {
-      if (typeof window === "undefined") {
-        return initialValue;
-      }
-
       const cookieValue = getCookie(key);
       if (cookieValue) {
         try {
@@ -50,21 +41,13 @@ export function atomWithCookie<T>(
       return initialValue;
     },
     setItem: (_, value) => {
-      if (typeof window !== "undefined") {
-        const encoded = JSON.stringify(value);
-        setCookie(key, encoded, options);
-      }
+      const encoded = typeof value === "string" ? value : JSON.stringify(value);
+      setCookie(key, encoded, options);
     },
     removeItem: () => {
-      if (typeof window !== "undefined") {
-        deleteCookie(key, options.path);
-      }
+      deleteCookie(key, options.path || "/");
     },
     subscribe: (_, callback) => {
-      if (typeof window === "undefined") {
-        return () => {};
-      }
-
       const timeout = setTimeout(() => {
         const cookieValue = getCookie(key);
         if (cookieValue) {
