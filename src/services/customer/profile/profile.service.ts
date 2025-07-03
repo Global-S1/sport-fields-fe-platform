@@ -9,8 +9,8 @@ import {
   IProfileRequest,
 } from "./interfaces/profile.form.request";
 
-export const getFavorites = async (userUuid: string, token: string) => {
-  const { cookie } = await getCookieClient();
+export const getFavorites = async (userUuid: string) => {
+  const { cookie, token } = await getCookieClient();
 
   const response = await privateInstance.get<
     IHttpDataItems<IGetFavoritesResponse>
@@ -24,12 +24,8 @@ export const getFavorites = async (userUuid: string, token: string) => {
   return response.data;
 };
 
-export const updateImage = async (
-  userUuid: string,
-  body: IPhotoRequest,
-  token: string
-) => {
-  const { cookie } = await getCookieClient();
+export const updateImage = async (userUuid: string, body: IPhotoRequest) => {
+  const { cookie, token } = await getCookieClient();
   const formData = new FormData();
   formData.append("userImg", body.userImg[0]);
 
@@ -48,12 +44,8 @@ export const updateImage = async (
   return response.data.data.userImg;
 };
 
-export const updateData = async (
-  userUuid: string,
-  body: IProfileRequest,
-  token: string
-) => {
-  const { cookie } = await getCookieClient();
+export const updateData = async (userUuid: string, body: IProfileRequest) => {
+  const { cookie, token } = await getCookieClient();
   const formData = new FormData();
   formData.append("data", JSON.stringify(body));
 

@@ -1,6 +1,6 @@
-import clsx from "../../../libs/clsx";
 import { cloneElement } from "react";
 import { IconType } from "react-icons";
+import clsx from "../../../libs/clsx";
 import { IColors, ISizes } from "../../config/config.component.interface";
 import { LoaderDots } from "../loader/loader-dots.component";
 
@@ -33,23 +33,22 @@ export const Button = ({
   const stylesInline: Record<IColors, string> = {
     primary:
       "px-6 border-blueSport-500 bg-primary-400 hover:bg-blueSport-700 hover:border-blueSport-700 text-text-inverse",
-    secondary:
-      "px-6 border-greenLemon-700 bg-greenLemon-700 text-text-inverse",
-    red:
-      "px-6 border-redBlock-600 bg-redBlock-600 text-text-inverse",
+    secondary: "px-6 border-greenLemon-700 bg-greenLemon-700 text-text-inverse",
+    red: "px-6 border-redBlock-600 bg-redBlock-600 text-text-inverse",
     white:
       "px-6 border-white bg-backgroundSoft text-black hover:bg-blueSport-500 hover:border-blueSport-500 hover:text-text-inverse",
-    gray: "border-main-500 bg-main-500 text-white hover:border-main-600 hover:bg-main-600",
+    gray: "border-neutral-300 bg-neutral-300 text-white hover:border-neutral-600 hover:bg-neutral-600",
     custom: "",
   };
 
   const stylesOutline: Record<IColors, string> = {
-    primary: "px-6 bg-transparent border-2 border-blueSport-500 text-blueSport-500 hover:text-white hover:bg-blueSport-700",
+    primary:
+      "px-6 bg-transparent border-2 border-blueSport-500 text-blueSport-500 hover:text-white hover:bg-blueSport-700",
     secondary: "px-6 greenLemon-700 border-greenLemon-700 text-text-main",
     red: "px-6 border-redBlock-600 text-redBlock-600",
-    white:      
+    white:
       "px-6 bg-transparent border-blueSport-500 text-blueSport-500 hover:border-blueSport-500",
-    gray: "px-6 border-main-500 text-white hover:border-white",
+    gray: "px-6 border-gray-400 text-gray-700 hover:bg-gray-600 hover:text-white hover:cursor-pointer",
     custom: "",
   };
 

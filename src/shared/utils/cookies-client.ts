@@ -40,7 +40,12 @@ const getCookie = async (name: string) => {
 };
 
 export const getCookieClient = async () => {
-  const token = await getCookie("sessionToken");
+  const sessionToken = await getCookie("sessionToken");
+  const currentTokenRaw = await getCookie("current-token");
 
-  return { cookie: token };
+  const currentToken = currentTokenRaw?.startsWith('"')
+    ? JSON.parse(currentTokenRaw)
+    : currentTokenRaw;
+
+  return { cookie: sessionToken, token: currentToken };
 };

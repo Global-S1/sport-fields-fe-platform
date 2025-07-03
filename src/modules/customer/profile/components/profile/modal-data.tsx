@@ -1,11 +1,11 @@
 "use client";
 
+import { Button } from "@/shared/components/button/button.component";
+import { Input } from "@/shared/components/input/input.component";
+import { Modal } from "@/shared/components/modal/modal.component";
+import { useTranslations } from "next-intl";
 import { SubmitHandler, UseFormReturn } from "react-hook-form";
 import { IProfileForm } from "../../interfaces/profile-form.interface";
-import { Modal } from "@/shared/components/modal/modal.component";
-import { Input } from "@/shared/components/input/input.component";
-import { Button } from "@/shared/components/button/button.component";
-import { useTranslations } from "next-intl";
 
 interface Props {
   isOpen: boolean;
