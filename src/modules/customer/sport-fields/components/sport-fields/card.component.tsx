@@ -2,6 +2,8 @@
 
 import { Link } from "@/i18n/navigation";
 import { getDistanceBetweenCoords } from "@/shared/helpers/get-distance-cords.helper";
+import { locationAtom } from "@/shared/stores/global";
+import { useAtomValue } from "jotai";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { LoaderIcon } from "react-hot-toast";
@@ -16,6 +18,7 @@ interface Props {
 }
 
 export const SportFieldCard = ({ sportField }: Props) => {
+  const location = useAtomValue(locationAtom);
   const t = useTranslations("public.pages.sportFields.card");
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -32,15 +35,13 @@ export const SportFieldCard = ({ sportField }: Props) => {
   } = sportField;
 
   const distance =
-    latitude && longitude
-      ? getDistanceBetweenCoords(
-          { latitude: 0, longitude: 0 },
-          {
-            latitude: Number(latitude),
-            longitude: Number(longitude),
-          }
-        )
+    latitude && longitude && location
+      ? getDistanceBetweenCoords(location, {
+          latitude: Number(latitude),
+          longitude: Number(longitude),
+        })
       : null;
+
   return (
     <Link
       href={`/details/${productsUuid}`}

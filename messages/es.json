@@ -220,7 +220,8 @@
         "sendButton": "Verificar",
         "success": "Otp-Code correcto",
         "codeInput": {
-          "required": "Se debe ingresar un código"
+          "required": "Se debe ingresar un código",
+          "minLength": "El código debe tener 6 dígitos"
         }
       },
       "changuePassword": {
@@ -413,8 +414,12 @@
                 "description": {
                   "label": "Descripción"
                 },
-                "details": { "label": "Detalles" },
-                "opinions": { "label": "Opiniones" }
+                "details": {
+                  "label": "Detalles"
+                },
+                "opinions": {
+                  "label": "Opiniones"
+                }
               }
             },
             "text": {
@@ -636,7 +641,8 @@
           "location": "Dirección",
           "owner": "Anfitrión",
           "includes": "Incluye",
-          "hour": "la hora"
+          "hour": "la hora",
+          "successful_reservations": "reservas exitosas"
         },
         "buttons": {
           "reservation": "Reservar"
