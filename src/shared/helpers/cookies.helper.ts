@@ -29,7 +29,6 @@ export function setCookie(
   options: CookieOptions = {}
 ) {
   if (typeof document === "undefined") {
-    console.log("document undefined");
     return;
   }
 
@@ -47,7 +46,6 @@ export function setCookie(
   }
 
   document.cookie = cookie;
-  console.log("setCookie", cookie);
 }
 
 export const deleteCookie = (key: string, path = "/") => {
