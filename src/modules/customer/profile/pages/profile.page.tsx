@@ -15,7 +15,9 @@ const ProfilePage = () => {
 
   const user = useAtomValue(currentUserAtom);
 
-  const [data, setData] = useState<IProfileFavorites[] | null>(null);
+  const [favoriteProductsData, setData] = useState<IProfileFavorites[] | null>(
+    null
+  );
 
   useEffect(() => {
     if (user?.userUuid) {
@@ -32,7 +34,7 @@ const ProfilePage = () => {
       </Heading>
       <ProfileAvatar />
 
-      {data && <ProfileFavorites data={data} />}
+      {favoriteProductsData && <ProfileFavorites data={favoriteProductsData} />}
     </Box>
   );
 };

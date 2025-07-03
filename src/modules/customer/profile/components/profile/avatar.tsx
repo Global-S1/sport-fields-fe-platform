@@ -1,15 +1,14 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { Box } from "@/shared/components/box/box.component";
-import { TbCamera } from "react-icons/tb";
+import { currentUserAtom } from "@/shared/store/global.store";
+import { useAtomValue } from "jotai";
 import { BiSolidEdit } from "react-icons/bi";
+import { TbCamera } from "react-icons/tb";
+import { useEditProfile } from "../../hooks/useEditProfile";
 import { ProfileButtons } from "./buttons";
 import ModalData from "./modal-data";
 import ModalPhoto from "./modal-foto";
-import { useEditProfile } from "../../hooks/useEditProfile";
-import { useAtomValue } from "jotai";
-import { currentUserAtom } from "@/shared/store/global.store";
 
 export const ProfileAvatar = () => {
   const user = useAtomValue(currentUserAtom);

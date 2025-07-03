@@ -10,7 +10,7 @@ export interface CookieOptions {
   path?: string;
   domain?: string;
   secure?: boolean;
-  sameSite?: "strict" | "lax" | "none";
+  sameSite?: "Strict" | "Lax" | "None";
 }
 
 export function atomWithCookie<T>(

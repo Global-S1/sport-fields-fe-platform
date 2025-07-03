@@ -1,28 +1,27 @@
-import { IPhotoForm, IProfileForm } from "../interfaces/profile-form.interface";
-import { TOAST_MODE } from "@/shared/components/toast/toast.config";
-import { triggerToast } from "@/shared/components/toast/toast-component";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useModal } from "@/shared/components/modal/hooks/useModal";
-import { useAtom, useAtomValue } from "jotai";
 import {
   updateData,
   updateImage,
 } from "@/services/customer/profile/profile.service";
-import { currentTokenAtom, currentUserAtom } from "@/shared/store/global.store";
+import { useModal } from "@/shared/components/modal/hooks/useModal";
+import { triggerToast } from "@/shared/components/toast/toast-component";
+import { TOAST_MODE } from "@/shared/components/toast/toast.config";
+import { currentUserAtom } from "@/shared/store/global.store";
+import { useAtom } from "jotai";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { IPhotoForm, IProfileForm } from "../interfaces/profile-form.interface";
 
 export const useEditProfile = () => {
   const [isOpenPhoto, toggleModalPhoto] = useModal();
   const [isEditData, toggleModalEdit] = useModal();
 
   const [user, setUser] = useAtom(currentUserAtom);
-  const token = useAtomValue(currentTokenAtom);
 
   const editForm = useForm<IProfileForm>();
   const photoForm = useForm<IPhotoForm>();
 
   const photoSubmit = async (data: IPhotoForm) => {
     try {
-      const userImg = await updateImage(user?.userUuid || "", data, token);
+      const userImg = await updateImage(user?.userUuid || "", data);
       if (userImg) {
         toggleModalPhoto();
         photoForm.reset();
@@ -40,7 +39,7 @@ export const useEditProfile = () => {
 
   const dataSubmit = async (data: IProfileForm) => {
     try {
-      const userData = await updateData(user?.userUuid || "", data, token);
+      const userData = await updateData(user?.userUuid || "", data);
       if (userData) {
         toggleModalEdit();
         editForm.reset();
