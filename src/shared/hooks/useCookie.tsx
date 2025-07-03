@@ -41,7 +41,7 @@ export function atomWithCookie<T>(
       return initialValue;
     },
     setItem: (_, value) => {
-      const encoded = JSON.stringify(value);
+      const encoded = typeof value === "string" ? value : JSON.stringify(value);
       setCookie(key, encoded, options);
     },
     removeItem: () => {

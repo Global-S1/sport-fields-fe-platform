@@ -28,7 +28,10 @@ export function setCookie(
   value: string,
   options: CookieOptions = {}
 ) {
-  if (typeof document === "undefined") return;
+  if (typeof document === "undefined") {
+    console.log("document undefined");
+    return;
+  }
 
   const { maxAge, path = "/", secure, sameSite } = options;
   let cookie = `${key}=${encodeURIComponent(value)}; path=${path}`;
@@ -44,6 +47,7 @@ export function setCookie(
   }
 
   document.cookie = cookie;
+  console.log("setCookie", cookie);
 }
 
 export const deleteCookie = (key: string, path = "/") => {

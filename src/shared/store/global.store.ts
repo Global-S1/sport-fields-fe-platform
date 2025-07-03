@@ -1,9 +1,10 @@
+"use client";
 import { atomWithStorage } from "jotai/utils";
-import { IUser } from "../interfaces/user.interface";
+import { ECookies } from "../enums/cookies.enum";
 import { ELocalStorage } from "../enums/local-storage.enum";
 import { atomWithCookie } from "../hooks/useCookie";
-import { ECookies } from "../enums/cookies.enum";
 import { IPrivileges } from "../interfaces/privileges.interface";
+import { IUser } from "../interfaces/user.interface";
 
 export const currentUserAtom = atomWithStorage<IUser | null>(
   ELocalStorage.CURRENT_USER,

@@ -1,27 +1,17 @@
 "use client";
-import { Box } from "@/shared/components/box/box.component";
-import { IProfileFavorites } from "../../interfaces/profile.interface";
-import { IoMdHeartEmpty } from "react-icons/io";
-import { Text } from "@/shared/components/text/text.component";
 import { Link } from "@/i18n/navigation";
-import { getFavorites } from "@/services/customer/profile/profile.service";
+import { Box } from "@/shared/components/box/box.component";
+import { Text } from "@/shared/components/text/text.component";
 import { useTranslations } from "next-intl";
-import { useAtomValue } from "jotai";
-import { currentUserAtom } from "@/shared/store/global.store";
-import { use, useEffect, useState } from "react";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { IProfileFavorites } from "../../interfaces/profile.interface";
 
-export const ProfileFavorites = () => {
+interface Props {
+  data: IProfileFavorites[];
+}
+
+export const ProfileFavorites = ({ data }: Props) => {
   const t = useTranslations("profile");
-  const user = useAtomValue(currentUserAtom);
-  const [data, setData] = useState<IProfileFavorites[]>();
-
-  useEffect(() => {
-    if (user?.userUuid) {
-      getFavorites(user.userUuid).then((res) =>
-        setData(res.data.items as IProfileFavorites[])
-      );
-    }
-  }, [user?.userUuid]);
 
   return (
     <Box className="container mx-auto px-4">
