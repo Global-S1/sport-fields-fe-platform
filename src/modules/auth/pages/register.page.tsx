@@ -19,8 +19,11 @@ export const RegisterPage = () => {
   );
 
   return (
-    <Box className="max-w-screen min-h-screen">
-      <Box className="relative h-16 w-full container mx-auto px-12 flex items-center">
+    <Box tag="main" className="max-w-screen min-h-screen">
+      <Box
+        tag="header"
+        className="relative h-16 w-full container mx-auto px-12 flex items-center"
+      >
         <Logo />
         <Link href={"/auth"} className="absolute group left-12 top-16">
           <Box className="flex items-center gap-1">
@@ -35,7 +38,7 @@ export const RegisterPage = () => {
         typeSelected={typeSelected}
       />
 
-      <Box className="mt-12 px-8 relative">
+      <Box tag="section" className="mt-12 px-8 relative">
         <AnimatePresence mode="wait">
           {typeSelected === ERegisterType.CUSTOMER && (
             <motion.div

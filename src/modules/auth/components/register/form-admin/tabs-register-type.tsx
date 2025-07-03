@@ -13,7 +13,10 @@ export const TabsRegisterType = ({ setTypeSelected, typeSelected }: Props) => {
   const t = useTranslations("auth.register.tabs");
 
   return (
-    <Box className="max-w-md xl:max-w-xl w-full mx-auto mt-12 relative flex items-center rounded-lg font-semibold shadow-lg py-2">
+    <Box
+      tag="section"
+      className="max-w-md xl:max-w-xl w-full mx-auto mt-12 relative flex items-center rounded-lg font-semibold shadow-lg py-2"
+    >
       <Box
         className={clsx(
           "h-full w-1/2 bg-blueSport-500 absolute -z-10 rounded-lg transition-all duration-200",

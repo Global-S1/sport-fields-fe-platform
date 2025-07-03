@@ -1,6 +1,10 @@
 {
   "auth": {
     "login": {
+      "metadata": {
+        "title": "Iniciar sesión | Sport Field",
+        "description": "Accede a tu cuenta para reservar canchas de fútbol fácilmente cerca de ti."
+      },
       "title": "¿Listo para jugar?",
       "description": "Inicia sesión con tu usuario o crea una nueva cuenta",
       "usernameInput": {
@@ -26,6 +30,10 @@
       "termAndServices": "Términos y Condiciones"
     },
     "register": {
+      "metadata": {
+        "title": "Crear cuenta | Sport Field",
+        "description": "Regístrate gratis y empieza a reservar canchas de fútbol en segundos."
+      },
       "back": "Regresar",
       "tabs": {
         "customer": "Como usuario",
@@ -202,6 +210,10 @@
       }
     },
     "recoveryPassword": {
+      "metadata": {
+        "title": "Recuperar contraseña | BuscaCanchas",
+        "description": "¿Olvidaste tu contraseña? Recupérala y vuelve a reservar tus canchas favoritas."
+      },
       "sendEmail": {
         "title": "Olvidaste tu contraseña",
         "description": "Por favor, ingresa tu email registrado para enviarte el código",

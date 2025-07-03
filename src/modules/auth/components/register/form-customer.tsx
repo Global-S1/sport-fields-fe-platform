@@ -13,11 +13,11 @@ export const RegisterFormCustomer = () => {
   const t = useTranslations("auth.register.customer");
 
   return (
-    <Box>
-      <Box className="text-center">
-        <h1 className="text-clip bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent text-2xl font-semibold">
+    <Box tag="section">
+      <Box tag="header" className="text-center">
+        <h2 className="text-clip bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent text-2xl font-semibold">
           {t("title")}
-        </h1>
+        </h2>
         <p className="mt-1 font-semibold">{t("subtitle")}</p>
       </Box>
 

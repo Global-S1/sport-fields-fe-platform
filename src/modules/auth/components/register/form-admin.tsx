@@ -17,14 +17,17 @@ export const RegisterFormAdmin = () => {
   );
 
   return (
-    <Box className="pb-4">
-      <Box>
-        <h1 className="text-clip bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent text-2xl font-semibold text-center mb-4">
+    <Box tag="section" className="pb-4">
+      <Box tag="header">
+        <h2 className="text-clip bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent text-2xl font-semibold text-center mb-4">
           {t("title")}
-        </h1>
+        </h2>
       </Box>
 
-      <Box className="w-full max-w-xl h-16 mx-auto flex items-center justify-evenly">
+      <Box
+        tag="nav"
+        className="w-full max-w-xl h-16 mx-auto flex items-center justify-evenly"
+      >
         {Object.values(ERegisterAdminSteps).map((step, index) => (
           <button
             className="flex flex-col items-center w-fit cursor-default"
