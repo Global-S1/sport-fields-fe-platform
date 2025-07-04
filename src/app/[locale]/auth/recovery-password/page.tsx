@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: PageProps) {
   });
 
   return {
-    title: t("auth.register.metadata.title"),
+    title: t("auth.recoveryPassword.metadata.title"),
     description: t("auth.recoveryPassword.metadata.description"),
     alternates: {
       canonical: `${config.DOMAIN}/${locale}/auth/recovery-password`,
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps) {
     openGraph: {
       title: t("auth.recoveryPassword.metadata.title"),
       description: t("auth.recoveryPassword.metadata.description"),
-      url: `${config.DOMAIN}/${locale}/recovery-password`,
+      url: `${config.DOMAIN}/${locale}/auth/recovery-password`,
       siteName: "Sport Field",
       locale,
       type: "website",

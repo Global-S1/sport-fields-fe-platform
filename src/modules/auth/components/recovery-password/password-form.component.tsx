@@ -1,25 +1,24 @@
 "use client";
-import { UseFormReturn } from "react-hook-form";
-import { IPasswordForm } from "../../interfaces/recovery-password-forms.interface";
-import { IChangePasswordContent } from "../../interfaces/recovery-password-content.interface";
-import { BackButton } from "./back-button";
-import { RecoveryPasswordStep } from "../../enums/recovery-password.enum";
 import { Box } from "@/shared/components/box/box.component";
+import { Button } from "@/shared/components/button/button.component";
+import { InputPassword } from "@/shared/components/input/input-password.component";
 import { Heading } from "@/shared/components/text/heading.component";
 import { Text } from "@/shared/components/text/text.component";
-import { InputPassword } from "@/shared/components/input/input-password.component";
-import { Button } from "@/shared/components/button/button.component";
-import { useSetAtom, useAtomValue } from "jotai";
-import {
-  recoveryPasswordEmailAtom,
-  recoveryPasswordCodeAtom,
-  recoveryPasswordStepAtom,
-} from "../../store/recovery-password.store";
-import { TOAST_MODE } from "@/shared/components/toast/toast.config";
 import { triggerToast } from "@/shared/components/toast/toast-component";
+import { TOAST_MODE } from "@/shared/components/toast/toast.config";
+import { useAtomValue } from "jotai";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { UseFormReturn } from "react-hook-form";
 import { sendPasswordAction } from "../../actions/send-password.action";
+import { RecoveryPasswordStep } from "../../enums/recovery-password.enum";
+import { IChangePasswordContent } from "../../interfaces/recovery-password-content.interface";
+import { IPasswordForm } from "../../interfaces/recovery-password-forms.interface";
+import {
+  recoveryPasswordCodeAtom,
+  recoveryPasswordEmailAtom,
+} from "../../store/recovery-password.store";
+import { BackButton } from "./back-button";
 
 interface Props {
   form: UseFormReturn<IPasswordForm>;
@@ -27,7 +26,6 @@ interface Props {
 }
 
 export const PasswordFormComponent = ({ content, form }: Props) => {
-  const setStep = useSetAtom(recoveryPasswordStepAtom);
   const email = useAtomValue(recoveryPasswordEmailAtom);
   const code = useAtomValue(recoveryPasswordCodeAtom);
   const router = useRouter();
@@ -47,7 +45,6 @@ export const PasswordFormComponent = ({ content, form }: Props) => {
         mode: TOAST_MODE.SUCCESS,
         title: content?.success || "",
       });
-      setStep(RecoveryPasswordStep.EMAIL);
       router.push("/auth");
     } catch (error: any) {
       triggerToast({ mode: TOAST_MODE.ERROR, title: error.message });
