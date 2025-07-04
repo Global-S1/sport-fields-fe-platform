@@ -13,9 +13,7 @@ import { ERegisterType } from "../enums/register.enum";
 
 export const RegisterPage = () => {
   const t = useTranslations("auth.register");
-  const [typeSelected, setTypeSelected] = useState<ERegisterType>(
-    ERegisterType.CUSTOMER
-  );
+  const [typeSelected] = useState<ERegisterType>(ERegisterType.CUSTOMER);
 
   return (
     <Box tag="main" className="max-w-screen min-h-screen">
