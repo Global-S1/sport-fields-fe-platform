@@ -34,7 +34,7 @@ export const TabsRegisterType = ({ setTypeSelected, typeSelected }: Props) => {
       >
         {t("customer")}
       </button>
-      <button
+      {/* <button
         className={clsx(
           "w-1/2",
           typeSelected === ERegisterType.ADMIN && "text-white"
@@ -44,7 +44,7 @@ export const TabsRegisterType = ({ setTypeSelected, typeSelected }: Props) => {
         }}
       >
         {t("admin")}
-      </button>
+      </button> */}
     </Box>
   );
 };

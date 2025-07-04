@@ -1,8 +1,7 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import clsx from "clsx";
-import { usePathname } from "next/navigation";
 
 interface Props {
   href: string;
@@ -20,7 +19,10 @@ export const ActiveLink = ({
   exact,
 }: Props) => {
   const pathname = usePathname();
-  const isActive = exact ? pathname === href : pathname.startsWith(href);
+
+  const isActive = exact
+    ? pathname === href
+    : pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <Link href={href} className={clsx(className, isActive && activeClassName)}>

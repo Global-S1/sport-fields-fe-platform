@@ -25,7 +25,8 @@ export const CustomerNavbar = () => {
                 activeClassName="text-green-500"
                 key={item.name}
               >
-                <Icon size={item.size ?? 28} />
+                {/* <Icon size={item.size ?? 28} /> */}
+                <Icon size={28} />
                 <Text model="sm">{item.name}</Text>
               </ActiveLink>
             );
