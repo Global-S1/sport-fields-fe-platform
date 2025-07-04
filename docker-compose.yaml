@@ -1,0 +1,23 @@
+networks:
+  gcp_network:
+    name: ${DOCKER_NETWORK}
+    driver: bridge
+    external: true
+
+services:
+  app.sport.fields.reservation:
+    labels:
+      svc: "app.sport.fields.reservation"
+    container_name: app.sport.fields.reservation
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        - APP_STAGE=${STAGE}
+    environment:
+      STAGE: ${STAGE}
+    ports:
+      - "80"
+    networks:
+      - gcp_network
