@@ -663,6 +663,10 @@
     }
   },
   "profile": {
+    "metadata": {
+      "title": "Mi Perfil | Sport Field",
+      "description": "Edita tu información personal y consulta tus canchas favoritas desde tu perfil."
+    },
     "title": "Mi Perfil",
     "profileData": {
       "buttons": {
