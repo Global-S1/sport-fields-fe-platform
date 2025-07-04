@@ -8,15 +8,12 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { MdArrowBack } from "react-icons/md";
 import { RegisterFormAdmin } from "../components/register/form-admin";
-import { TabsRegisterType } from "../components/register/form-admin/tabs-register-type";
 import { RegisterFormCustomer } from "../components/register/form-customer";
 import { ERegisterType } from "../enums/register.enum";
 
 export const RegisterPage = () => {
   const t = useTranslations("auth.register");
-  const [typeSelected, setTypeSelected] = useState<ERegisterType>(
-    ERegisterType.CUSTOMER
-  );
+  const [typeSelected] = useState<ERegisterType>(ERegisterType.CUSTOMER);
 
   return (
     <Box tag="main" className="max-w-screen min-h-screen">
@@ -33,10 +30,10 @@ export const RegisterPage = () => {
           <Box className="h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-greenLemon-600 to-blueSport-500 duration-200"></Box>
         </Link>
       </Box>
-      <TabsRegisterType
+      {/* <TabsRegisterType
         setTypeSelected={setTypeSelected}
         typeSelected={typeSelected}
-      />
+      /> */}
 
       <Box tag="section" className="mt-12 px-8 relative">
         <AnimatePresence mode="wait">
