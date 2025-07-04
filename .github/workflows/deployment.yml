@@ -1,0 +1,154 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - "feature/**"
+      - develop
+      - qa
+      - prod
+env:
+  current_branch: ${{ startsWith(github.ref_name, 'feature/') && 'feature' || github.ref_name }}
+  feature_branch: "feature"
+  develop_branch: "develop"
+  qa_branch: "qa"
+  prod_branch: "prod"
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.0.0"
+      - name: Install dependencies
+        run: npm install
+      - name: Create build
+        run: npm run build
+
+  deployment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [build]
+    if: ${{ needs.build.result == 'success'  }}
+    steps:
+      - name: Connect via SSH and run commands
+        uses: appleboy/ssh-action@master
+        env:
+          server_ip:
+            ${{ startsWith(github.ref_name, env.feature_branch) &&  secrets.SFR_FEATURE_SERVER_IP ||
+            env.current_branch == env.develop_branch && secrets.SFR_DEV_SERVER_IP ||
+            env.current_branch == env.qa_branch && secrets.SFR_QA_SERVER_IP ||
+            env.current_branch == env.prod_branch && secrets.SFR_PROD_SERVER_IP}}
+          server_ssh_user:
+            ${{ startsWith(github.ref_name, env.feature_branch) &&  secrets.SFR_FEATURE_SERVER_SSH_USER ||
+            env.current_branch == env.develop_branch && secrets.SFR_DEV_SERVER_SSH_USER ||
+            env.current_branch == env.qa_branch && secrets.SFR_QA_SERVER_SSH_USER ||
+            env.current_branch == env.prod_branch && secrets.SFR_PROD_SERVER_SSH_USER}}
+          server_ssh_private_key:
+            ${{ startsWith(github.ref_name, env.feature_branch) &&  secrets.SFR_FEATURE_SERVER_SSH_PRIVATE_KEY ||
+            env.current_branch == env.develop_branch && secrets.SFR_DEV_SERVER_SSH_PRIVATE_KEY ||
+            env.current_branch == env.qa_branch && secrets.SFR_QA_SERVER_SSH_PRIVATE_KEY ||
+            env.current_branch == env.prod_branch && secrets.SFR_PROD_SERVER_SSH_PRIVATE_KEY}}
+        with:
+          host: ${{env.server_ip}}
+          username: ${{ env.server_ssh_user}}
+          key: ${{env.server_ssh_private_key}}
+          port: 22
+          script: |
+            echo "Successful SSH connection"
+            if cd /home/${{ env.server_ssh_user }}/${{ github.event.repository.name }}; then
+                echo "rebuilding image..."
+            else
+                echo "Cloning image..."
+                cd /home/${{ env.server_ssh_user }}
+                sudo git clone ${{ github.event.repository.ssh_url }}
+                cd /home/${{ env.server_ssh_user }}/${{ github.event.repository.name }}
+            fi
+            sudo git checkout ${{ github.ref_name }}
+            sudo git pull
+            sudo cp .deployment/.env-${{env.current_branch}} .env
+            sudo sh create-tag.sh
+            sudo sh start.sh
+
+  deployment_success_notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    needs: [build, deployment]
+    if: ${{ needs.deployment.result == 'success'  }}
+    steps:
+      - name: Nofify job deployment success message
+        uses: slackapi/slack-github-action@v2.0.0
+        with:
+          webhook: ${{secrets.SLACK_HOOK_DEPLOY_CHANNEL}}
+          webhook-type: incoming-webhook
+          payload: |
+            text: |
+              *:angel:DEPLOYMENT:angel:*
+              *Repository*: <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>
+              *Branch*: ${{ github.head_ref || github.ref_name }}
+              *Author*: ${{ github.actor }}
+              *Workflow*: ${{ github.workflow }}
+              *Status*: :white_check_mark: ${{ needs.deployment.result }}
+              *Job*: *Deployment*
+              *Action*: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Action Logs>
+              *Message*: The deployment was successfully completed, and the latest changes have been applied to the environment.
+              Please take a moment to review the updates and verify that everything is working as expected :zap::zap:.
+
+  deployment_error_notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    needs: [build, deployment]
+    if: ${{ always() && needs.deployment.result == 'failure'  }}
+    steps:
+      - name: Nofify job deployment error message
+        uses: slackapi/slack-github-action@v2.0.0
+        with:
+          webhook: ${{secrets.SLACK_HOOK_DEPLOY_CHANNEL}}
+          webhook-type: incoming-webhook
+          payload: |
+            text: |
+              *:angel:DEPLOYMENT:angel:*
+              *Repository*: <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>
+              *Branch*: ${{ github.head_ref || github.ref_name }}
+              *Author*: ${{ github.actor }}
+              *Workflow*: ${{ github.workflow }}
+              *Status*: :x: ${{ needs.deployment.result }}
+              *Job*: *Deployment*
+              *Action*: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Action Logs>
+              *Message*: An error occurred during the deployment process. While the latest changes have been applied to the environment,
+              they might not be visible or functioning correctly. Please review the service to ensure everything is working as expected
+              and check the deployment action logs to identify and resolve the issue :fire::fire:.
+
+  build_error_notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    needs: [build]
+    if: ${{ always() && needs.build.result == 'failure'  }}
+    steps:
+      - name: Nofify job build error message
+        uses: slackapi/slack-github-action@v2.0.0
+        with:
+          webhook: ${{secrets.SLACK_HOOK_DEPLOY_CHANNEL}}
+          webhook-type: incoming-webhook
+          payload: |
+            text: |
+              *:angel:DEPLOYMENT:angel:*
+              *Repository*: <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>
+              *Branch*: ${{ github.head_ref || github.ref_name }}
+              *Author*: ${{ github.actor }}
+              *Workflow*: ${{ github.workflow }}
+              *Status*: :x: ${{ needs.build.result }}
+              *Job*: *Build*
+              *Action*: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Action Logs>
+              *Message*: An error occurred during the build process. While the latest changes have been applied to the environment,
+              they might not be visible or functioning correctly. Please review the service to ensure everything is working as expected
+              and check the build action logs to identify and resolve the issue :warning::warning:.
